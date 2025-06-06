@@ -1,19 +1,22 @@
 @import "tailwindcss";
 
+/* Light mode */
 :root {
-  --background: #E6F0FA;
-  --foreground: #171717;
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans, Arial, sans-serif);
-  --font-mono: var(--font-geist-mono, monospace);
+  --background: #f8fafc;
+  --foreground: #1e293b;
+  --card-bg: #e2e8f0;
+  --text-main: #1e293b;
+  --highlight: #0d9488;
+  --icon-color: #475569;
 }
 
 .dark {
-  --background: #050A18;
-  --foreground: #ededed;
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --background: #0a192f;
+  --foreground: #ffffff;
+  --card-bg: #112240;
+  --text-main: #e2e8f0;
+  --highlight: #0d9488;
+  --icon-color: #94a3b8;
 }
 
 body {
@@ -26,7 +29,7 @@ body {
 }
 
 .dark body {
-  @apply bg-black text-white;
+  @apply bg-[#0a192f] text-white;
 }
 
 * {
@@ -39,4 +42,24 @@ html, body {
 
 input, textarea, button, select {
   cursor: auto;
+}
+
+.d-none-first-canva canvas:first-child {
+  display: none !important;
+}
+
+.nav-gradient-border {
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  background:
+    linear-gradient(var(--nav-bg), var(--nav-bg)) padding-box,
+    linear-gradient(90deg, var(--nav-gradient-start), var(--nav-gradient-end)) border-box;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: var(--highlight);
+  border-radius: 9999px;
 }
