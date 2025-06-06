@@ -210,7 +210,7 @@ export default function ProjectGallery() {
                         <Wrench size={18} />
                       </a>
                     )}
-                    {openProject.gallery?.length > 0 && (
+                    {Array.isArray(openProject.gallery) && openProject.gallery.length > 0 && (
                       <button onClick={() => setOpenGallery(true)} className="hover:text-[var(--highlight)] text-[var(--text-main)]">
                         <ImageIcon size={18} />
                       </button>
@@ -243,43 +243,54 @@ export default function ProjectGallery() {
               )}
             </motion.div>
 
-            {openGallery && openProject.gallery && (
-            <Lightbox
-              open={openGallery}
-              close={() => setOpenGallery(false)}
-              closeOnBackdropClick={true}
-              slides={openProject.gallery}
-              render={{
-                slide: ({ slide }) => {
-                  const isVideo =
-                    slide.type === 'video' ||
-                    slide?.src?.endsWith('.mp4') ||
-                    (Array.isArray(slide.sources) && slide.sources[0]?.type?.includes('video'))
+            {openGallery && Array.isArray(openProject.gallery) && (
+              <Lightbox
+                open={openGallery}
+                close={() => setOpenGallery(false)}
+                closeOnBackdropClick={true}
+                slides={openProject.gallery}
+                render={{
+                  slide: ({ slide }) => {
+                    const isVideo =
+                      slide.type === 'video' ||
+                      slide?.src?.endsWith('.mp4') ||
+                      (Array.isArray(slide.sources) && slide.sources[0]?.type?.includes('video'))
 
-                  if (isVideo) {
-                    const videoSrc = slide?.src || slide?.sources?.[0]?.src
+                    if (isVideo) {
+                      const videoSrc = slide?.src || slide?.sources?.[0]?.src
+                      return (
+                        <div className="flex items-center justify-center w-full h-full bg-black">
+                          <video
+                            src={videoSrc}
+                            controls
+                            autoPlay
+                            loop
+                            muted
+                            className="max-h-full max-w-full"
+                          />
+                        </div>
+                      )
+                    }
+
                     return (
-                      <div className="flex items-center justify-center w-full h-full bg-black">
-                        <video src={videoSrc} controls autoPlay loop muted className="max-h-full max-w-full" />
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        <img
+                          src={slide.src}
+                          alt={slide.caption || 'image'}
+                          className="max-h-full max-w-full object-contain"
+                        />
+                        {slide.caption && (
+                          <div className="absolute bottom-4 text-sm text-white bg-black/70 px-4 py-1 rounded-full">
+                            {slide.caption}
+                          </div>
+                        )}
                       </div>
                     )
-                  }
-
-                  return (
-                    <div className="relative w-full h-full flex items-center justify-center">
-                      <img src={slide.src} alt={slide.caption || 'image'} className="max-h-full max-w-full object-contain" />
-                      {slide.caption && (
-                        <div className="absolute bottom-4 text-sm text-white bg-black/70 px-4 py-1 rounded-full">
-                          {slide.caption}
-                        </div>
-                      )}
-                    </div>
-                  )
-                },
-              }}
-            />
-
+                  },
+                }}
+              />
             )}
+
           </ModalPortal>
         )}
       </AnimatePresence>
