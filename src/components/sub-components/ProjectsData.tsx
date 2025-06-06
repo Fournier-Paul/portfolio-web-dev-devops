@@ -1,4 +1,19 @@
-export const projects = [{
+export type Project = {
+  title: string
+  category: string | string[]
+  description: string
+  longDescription: string
+  image: string
+  technologies: string[]
+  gallery?: { src: string; caption?: string; thumb?: string; type?: string; sources?: any[] }[]
+  githubLink?: string
+  backendGithubLink?: string
+  externalLink?: string
+  technicalLink?: string
+}
+
+
+export const projects: Project[] = [{
 		title: "Projet d'infrastructure locale domestique",
 		category: "Infra",
 		description: "Stack domestique hébergée sur un Raspberry Pi 5 avec services conteneurisés via Docker.",
