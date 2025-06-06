@@ -14,7 +14,7 @@ import {
 
 type SkillCategory = {
   title: string;
-  icon: JSX.Element;
+  icon: React.ReactElement
   skills: {
     name: string;
     logo?: string;
