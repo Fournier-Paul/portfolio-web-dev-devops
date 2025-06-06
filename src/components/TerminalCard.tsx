@@ -11,9 +11,23 @@ const lines = [
 
 const commandResponses: Record<string, string> = {
   help: 'Commandes disponibles: help, about, skills, contact, clear',
-  about: 'Passionné par le web, l\'automatisation et la sécurité.',
+  about: "Passionné par le web, l'automatisation et la sécurité.\nJ'aime relever des défis complexes et proposer des solutions efficaces et durables.",
   skills: 'DevOps: Docker, CI/CD, Terraform | Web: Nuxt.js, React, Node.js | Cloud: Digital Ocean, AWS',
-  contact: 'Email: contact@paulfournier.dev | GitHub: github.com/paulfournier | LinkedIn: linkedin.com/paul-fournier-dev/',
+  contact: '📧 contact@paulfournier.dev | 🔗 github.com/paulfournier | LinkedIn: linkedin.com/paul-fournier-dev/',
+  cv: '📄 Télécharger le CV : https://paulfournier.dev/cv.pdf',
+  ls: 'about  skills  contact  projects  cv',
+  cd: 'Commande non supportée ici 😅',
+  sudo: "🛑 Vous n'avez pas les permissions nécessaires pour exécuter cette commande.",
+  "rm -rf /": "😱 Erreur critique : suppression du système...😉",
+  coffee: "☕ Chargement de la caféine... Prêt à coder !",
+ascii: `
+██████╗  █████╗ ██╗   ██╗██╗     
+██╔══██╗██╔══██╗██║   ██║██║     
+██████╔╝███████║██║   ██║██║     
+██╔═══╝ ██╔══██║██║   ██║██║     
+██║     ██║  ██║╚██████╔╝███████╗
+╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+`,
   clear: '',
 }
 
@@ -30,7 +44,6 @@ export default function TerminalCard() {
       const toDisplay = line.prefix || line.text || ''
       timeouts.push(
         setTimeout(() => {
-          let current = ''
           for (let i = 0; i <= toDisplay.length; i++) {
             const timeout = setTimeout(() => {
               setDisplayedLines((prev) => {
