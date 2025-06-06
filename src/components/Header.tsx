@@ -1,80 +1,101 @@
 'use client'
 
-import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import {
+  Home, Code, Briefcase, GraduationCap, Laptop, Mail, Sun, Moon
+} from 'lucide-react'
+import type { Section } from './sub-components/constants'
 
-export default function Header() {
+interface HeaderProps {
+  onSectionChange: (section: Section) => void
+  currentSection: Section
+}
+
+export default function Header({ onSectionChange, currentSection }: HeaderProps) {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const isDark = theme === 'dark'
 
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
 
-  const isDark = theme === 'dark'
+  const navItems = [
+    { label: 'Accueil', section: 'home', icon: <Home size={16} /> },
+    { label: 'Compétences', section: 'skills', icon: <Code size={16} /> },
+    { label: 'Expérience', section: 'experience', icon: <Briefcase size={16} /> },
+    { label: 'Formation', section: 'education', icon: <GraduationCap size={16} /> },
+    { label: 'Projets', section: 'projects', icon: <Laptop size={16} /> },
+    { label: 'Contact', section: 'contact', icon: <Mail size={16} /> },
+  ]
 
   return (
-    <header className="flex justify-between items-center px-6 py-4 sticky top-0 z-50 bg-[var(--background)] text-[var(--foreground)] border-b border-zinc-200 dark:border-white transition-colors duration-1000">
-      <h1 className="text-lg font-bold tracking-tight">
-        &lt; Paul-Fournier /&gt;
-      </h1>
-      <nav className="flex items-center gap-6 text-sm">
-        <Link href="#projects" className="hover:text-primary transition">Projets</Link>
-        <Link href="#contact" className="hover:text-primary transition">Contact</Link>
+    <header className="w-full justify-center sticky top-4 z-30 px-4 hidden md:flex">
+      <div
+        className={`nav-gradient-border flex items-center px-4 py-2 gap-2 rounded-full
+        backdrop-blur-md transition-all duration-500
+        ${isDark ? 'bg-[#0f172a]/80' : 'bg-white/80'}
+      `}
+        style={{
+          ['--nav-bg' as any]: isDark ? '#0f172a' : '#ffffff',
+          ['--nav-gradient-start' as any]: isDark ? '#0d9488' : '#d1d5db',
+          ['--nav-gradient-end' as any]: isDark ? '#0d9488' : '#e5e7eb',
+        }}
+      >
+        {navItems.map(({ label, section, icon }) => {
+          const isActive = currentSection === section
+          return (
+            <button
+              key={section}
+              onClick={() => onSectionChange(section)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all duration-300 ${
+                isActive
+                  ? isDark
+                    ? 'bg-zinc-800/80 text-white font-semibold'
+                    : 'bg-zinc-200 text-zinc-900 font-semibold'
+                  : isDark
+                    ? 'text-zinc-300 hover:bg-white/10'
+                    : 'text-zinc-600 hover:bg-zinc-100'
+              }`}
+            >
+              {icon}
+              <span>{label}</span>
+            </button>
+          )
+        })}
 
-        {/* Dark Mode animation */}
+        {/* Toggle Theme */}
         <button
           onClick={() => setTheme(isDark ? 'light' : 'dark')}
-          aria-label="Toggle Dark Mode"
-          type="button"
-          className="relative ml-1 mr-1 h-10 w-10 rounded p-1 transition-colors duration-500 text-[var(--foreground)] active:scale-90"
+          aria-label="Toggle Theme"
+          className="ml-2 h-10 w-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
         >
           <AnimatePresence mode="wait" initial={false}>
             {isDark ? (
-              <motion.span
+              <motion.div
                 key="sun"
-                initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 flex items-center justify-center transition-transform duration-200 hover:scale-125"
               >
-                {/* Sun */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                >
-                  <path d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
-                </svg>
-              </motion.span>
+                <Sun size={20} className="text-white" />
+              </motion.div>
             ) : (
-              <motion.span
+              <motion.div
                 key="moon"
-                initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 flex items-center justify-center transition-transform duration-200 scale-[1.1] hover:scale-125"
               >
-                {/* Moon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
-                </svg>
-              </motion.span>
+                <Moon size={20} className="text-zinc-700" />
+              </motion.div>
             )}
           </AnimatePresence>
         </button>
-      </nav>
+      </div>
     </header>
   )
 }
