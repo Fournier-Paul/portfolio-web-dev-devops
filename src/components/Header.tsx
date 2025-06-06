@@ -65,7 +65,6 @@ export default function Header({ onSectionChange, currentSection }: HeaderProps)
           )
         })}
 
-        {/* Toggle Theme */}
         <button
           onClick={() => setTheme(isDark ? 'light' : 'dark')}
           aria-label="Toggle Theme"
