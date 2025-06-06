@@ -219,7 +219,7 @@ export default function ProjectGallery() {
                 </footer>
               </motion.div>
 
-              {openProjectIndex > 0 && (
+              {typeof openProjectIndex === 'number' && openProjectIndex > 0 && (
                 <button
                   className="fixed left-4 md:left-8 top-1/2 z-[9999] -translate-y-1/2 bg-white/20 backdrop-blur text-white p-3 rounded-full hover:bg-white/30 shadow-lg"
                   onClick={(e) => {
@@ -230,17 +230,21 @@ export default function ProjectGallery() {
                   <ChevronLeft size={28} />
                 </button>
               )}
-              {openProjectIndex < filtered.length - 1 && (
-                <button
-                  className="fixed right-4 md:right-8 top-1/2 z-[9999] -translate-y-1/2 bg-white/20 backdrop-blur text-white p-3 rounded-full hover:bg-white/30 shadow-lg"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setOpenProjectIndex(openProjectIndex + 1)
-                  }}
-                >
-                  <ChevronRight size={28} />
-                </button>
+
+              {typeof openProjectIndex === 'number' &&
+                filtered?.length &&
+                openProjectIndex < filtered.length - 1 && (
+                  <button
+                    className="fixed right-4 md:right-8 top-1/2 z-[9999] -translate-y-1/2 bg-white/20 backdrop-blur text-white p-3 rounded-full hover:bg-white/30 shadow-lg"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setOpenProjectIndex(openProjectIndex + 1)
+                    }}
+                  >
+                    <ChevronRight size={28} />
+                  </button>
               )}
+
             </motion.div>
 
             {openGallery && Array.isArray(openProject.gallery) && (
