@@ -2,43 +2,47 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { motion } from "framer-motion";
+import SectionTitle from './sub-components/SectionTitle'
+import SectionDescription from './sub-components/SectionDescription'
+
+
+const icons = [
+  "html5", "css3", "javascript", "typescript", "react", "nodejs", "nextjs", "mongodb",
+  "tailwindcss", "git", "github", "figma", "docker", "postgresql", "php", "firebase",
+  "bash", "vuejs", "jquery", "webpack", "wordpress", "sass", "python",
+  "linux", "ansible", "nginx", "mysql", "terraform", "vscode"
+];
+
+const radius = 27;
+const scale = 6;
+
+const loadSvgAsTexture = (url: string): Promise<THREE.Texture> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const size = 128;
+      const canvas = document.createElement("canvas");
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return reject("Canvas context is null");
+      ctx.drawImage(img, 0, 0, size, size);
+      const texture = new THREE.Texture(canvas);
+      texture.needsUpdate = true;
+      resolve(texture);
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+};
 
 const SkillCanvas = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const groupRef = useRef<THREE.Group>(new THREE.Group());
   const hoveredRef = useRef<THREE.Sprite | null>(null);
-
-  const icons: string[] = [
-    "html5", "css3", "javascript", "typescript", "react", "nodejs", "nextjs", "mongodb",
-    "tailwindcss", "git", "github", "figma", "docker", "postgresql", "php", "firebase",
-    "bash", "vuejs", "gulp", "jquery", "webpack", "wordpress", "sass", "npm", "python",
-    "linux", "ansible", "nginx", "mysql", "terraform", "vscode"
-  ];
-
-  const radius = 27;
-  const scale = 6;
-
-  const loadSvgAsTexture = (url: string): Promise<THREE.Texture> => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.onload = () => {
-        const size = 128;
-        const canvas = document.createElement("canvas");
-        canvas.width = size;
-        canvas.height = size;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return reject("Canvas context is null");
-        ctx.drawImage(img, 0, 0, size, size);
-        const texture = new THREE.Texture(canvas);
-        texture.needsUpdate = true;
-        resolve(texture);
-      };
-      img.onerror = reject;
-      img.src = url;
-    });
-  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -49,9 +53,10 @@ const SkillCanvas = () => {
     camera.position.z = 50;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(375, 375);
+    renderer.setSize(250, 250);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
+
     rendererRef.current = renderer;
 
     const group = groupRef.current;
@@ -63,9 +68,7 @@ const SkillCanvas = () => {
         const texture = await loadSvgAsTexture(url);
         const phi = Math.acos(-1 + (2 * i) / icons.length);
         const theta = Math.sqrt(icons.length * Math.PI) * phi;
-        const sprite = new THREE.Sprite(
-          new THREE.SpriteMaterial({ map: texture, transparent: true })
-        );
+        const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true }));
         sprite.scale.set(scale, scale, 1);
         sprite.position.set(
           radius * Math.cos(theta) * Math.sin(phi),
@@ -81,7 +84,6 @@ const SkillCanvas = () => {
 
     scene.add(group);
 
-    // Inertie + limitation de vitesse
     let targetX = 0, targetY = 0;
     let rotationX = 0, rotationY = 0;
 
@@ -90,7 +92,6 @@ const SkillCanvas = () => {
 
     const onMouseMove = (e: MouseEvent) => {
       const rect = renderer.domElement.getBoundingClientRect();
-
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
@@ -118,20 +119,12 @@ const SkillCanvas = () => {
 
     const animate = () => {
       requestAnimationFrame(animate);
-
-      // Inertie lissée
       rotationX += (targetX - rotationX) * 0.1;
       rotationY += (targetY - rotationY) * 0.1;
-
       const maxSpeed = 0.01;
-
       group.rotation.y += THREE.MathUtils.clamp(rotationX, -maxSpeed, maxSpeed);
       group.rotation.x += THREE.MathUtils.clamp(rotationY, -maxSpeed, maxSpeed);
-
-      group.children.forEach((sprite) => {
-        (sprite as THREE.Sprite).lookAt(camera.position);
-      });
-
+      group.children.forEach((sprite) => (sprite as THREE.Sprite).lookAt(camera.position));
       renderer.render(scene, camera);
     };
 
@@ -144,9 +137,25 @@ const SkillCanvas = () => {
   }, []);
 
   return (
-    <section className="py-16 px-6 bg-[var(--background)] text-[var(--foreground)] transition-colors duration-1000">
-      <h3 className="text-xl font-bold mb-4">Skills</h3>
-      <div ref={containerRef} className="w-[375px] h-[375px] mx-auto" />
+    <section className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center max-w-3xl"
+      >
+        <SectionTitle>Stack technique</SectionTitle>
+        <SectionDescription>Un aperçu des technologies que j’explore dans mon travail</SectionDescription>
+      </motion.div>
+
+      <motion.div
+        ref={containerRef}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="w-[250px] h-[250px] rounded-full hover:drop-shadow-[0_0_20px_rgba(0,191,255,0.3)] transition-all duration-700 d-none-first-canva"
+      >
+      </motion.div>
     </section>
   );
 };

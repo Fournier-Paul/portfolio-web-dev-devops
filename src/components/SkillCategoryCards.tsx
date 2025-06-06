@@ -23,7 +23,7 @@ type SkillCategory = {
 
 const categories: SkillCategory[] = [
   {
-    title: 'Frontend Development',
+    title: 'Développement Frontend',
     icon: <Code className="w-5 h-5 text-blue-500" />,
     skills: [
       { name: 'Nuxt.js', logo: 'nuxtjs' },
@@ -38,10 +38,11 @@ const categories: SkillCategory[] = [
       { name: 'CSS3', logo: 'css3' },
       { name: 'Bootstrap', logo: 'bootstrap' },
       { name: 'jQuery', logo: 'jquery' },
+      { name: 'Seo', logo: 'seo' },
     ],
   },
   {
-    title: 'Backend Development',
+    title: 'Développement Backend',
     icon: <Database className="w-5 h-5 text-green-500" />,
     skills: [
       { name: 'Node.js', logo: 'nodejs' },
@@ -52,17 +53,6 @@ const categories: SkillCategory[] = [
       { name: 'SQLite', logo: 'sqlite' },
       { name: 'PostgreSQL', logo: 'postgresql' },
       { name: 'REST APIs' },
-    ],
-  },
-  {
-    title: 'UI/UX Design',
-    icon: <PenTool className="w-5 h-5 text-purple-500" />,
-    skills: [
-      { name: 'Figma', logo: 'figma' },
-      { name: 'Responsive Design' },
-      { name: 'Wireframing' },
-      { name: 'Lucidchart' },
-      { name: 'JMerise' },
     ],
   },
   {
@@ -79,7 +69,7 @@ const categories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Tools & Technologies',
+    title: 'Outils & Technologies',
     icon: <Wrench className="w-5 h-5 text-pink-500" />,
     skills: [
       { name: 'VS Code', logo: 'vscode' },
@@ -90,7 +80,7 @@ const categories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Security & Infra',
+    title: 'Sécurité & Infrastructure',
     icon: <ShieldCheck className="w-5 h-5 text-red-500" />,
     skills: [
       { name: 'SSH' },
@@ -104,60 +94,73 @@ const categories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Creative Skills',
-    icon: <Sparkles className="w-5 h-5 text-yellow-500" />,
+    title: 'Design UX/UI',
+    icon: <PenTool className="w-5 h-5 text-purple-500" />,
     skills: [
-      { name: 'UI Animation' },
-      { name: 'SVG Animation' },
-      { name: '3D Modeling' },
-      { name: 'Motion Graphics' },
-      { name: 'SEO' },
+      { name: 'Figma', logo: 'figma' },
+      { name: 'Responsive Design' },
+      { name: 'Wireframe' },
+      { name: 'Lucidchart' },
+      { name: 'JMerise' },
     ],
   },
 ];
 
 const SkillCategoryCards: FC = () => {
   return (
-    <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 p-4 transition-colors duration-1000 bg-[var(--background)] text-[var(--foreground)]">
-      {categories.map((cat, i) => (
-        <motion.div
-          key={i}
-          className="rounded-2xl p-5 shadow-md border border-zinc-200 dark:border-zinc-700 bg-[var(--background)] text-[var(--foreground)] transition-colors duration-1000 hover:shadow-xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: i * 0.1 }}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-gray-100 text-[var(--foreground)] border-zinc-200 dark:bg-white/10 rounded-xl">{cat.icon}</div>
-            <h3 className="text-lg font-semibold">{cat.title}</h3>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {cat.skills.map((skill, j) => (
-              <span
-                key={j}
-                className="flex items-center gap-2 text-sm px-3 py-1 rounded-full border transition-all duration-200
-                           bg-gray-100 text-[var(--foreground)] border-zinc-200
-                           dark:bg-white/5 dark:text-white dark:border-white/10
-                           hover:bg-zinc-100 dark:hover:bg-white/10
-                           active:scale-95"
-              >
-                {skill.logo && (
-                  <img
-                    src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.logo}/${skill.logo}-original.svg`}
-                    alt={skill.name}
-                    className="w-4 h-4 object-contain"
-                  />
-                )}
-                <div
-                className='dark:text-black'>
-                {skill.name}
-                </div>
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      ))}
+    <section className="relative z-10 mb-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="grid w-full max-w-6xl md:grid-cols-2 xl:grid-cols-3 gap-6"
+      >
+        {categories.map((cat, i) => (
+          <motion.div
+            key={i}
+            className="rounded-2xl p-5 shadow-md border border-zinc-200 dark:border-zinc-700
+               transition-transform duration-1000 hover:scale-[1.02] 
+               hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(100,116,139,0.4)]"
+            initial="hidden"
+            animate="visible"
+            whileInView="visible"
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.4, delay: i * 0.1 }}
+            viewport={{ once: false, amount: 0.2 }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-gray-100 border-zinc-200 dark:bg-white/10 rounded-xl">
+                {cat.icon}
+              </div>
+              <h3 className="text-lg font-semibold text-[var(--foreground)]">{cat.title}</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {cat.skills.map((skill, j) => (
+                <span
+                  key={j}
+                  className="flex items-center gap-2 text-sm px-3 py-1 rounded-full border transition-all duration-1000
+                             bg-[var(--card-bg)] border-zinc-200
+                             dark:bg-white/5 dark:border-white/10
+                             dark:hover:bg-white/10
+                             active:scale-95"
+                >
+                  {skill.logo && (
+                    <img
+                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.logo}/${skill.logo}-original.svg`}
+                      alt={skill.name}
+                      className="w-4 h-4 object-contain"
+                    />
+                  )}
+                  <span className="text-[var(--text-main)]">{skill.name}</span>
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 };
