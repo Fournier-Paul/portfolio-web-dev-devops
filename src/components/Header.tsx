@@ -21,7 +21,7 @@ export default function Header({ onSectionChange, currentSection }: HeaderProps)
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
 
-  const navItems = [
+  const navItems: { label: string; section: Section; icon: JSX.Element }[] = [
     { label: 'Accueil', section: 'home', icon: <Home size={16} /> },
     { label: 'Compétences', section: 'skills', icon: <Code size={16} /> },
     { label: 'Expérience', section: 'experience', icon: <Briefcase size={16} /> },
