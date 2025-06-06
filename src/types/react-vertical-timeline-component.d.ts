@@ -1,8 +1,1 @@
-declare module 'react-vertical-timeline-component'
-
-"include": [
-  "next-env.d.ts",
-  "**/*.ts",
-  "**/*.tsx",
-  "src/types"
-]
+declare module 'react-vertical-timeline-component';

@@ -23,19 +23,17 @@ export default function MobileNav({ onSectionChange, currentSection }: MobileNav
   if (!mounted) return null
 
   const navItems = [
-    { label: 'Accueil', section: 'home', icon: <Home size={20} /> },
-    { label: 'Compétences', section: 'skills', icon: <Code size={20} /> },
-    { label: 'Expérience', section: 'experience', icon: <Briefcase size={20} /> },
-    { label: 'Formation', section: 'education', icon: <GraduationCap size={20} /> },
-    { label: 'Projets', section: 'projects', icon: <Laptop size={20} /> },
-    { label: 'Contact', section: 'contact', icon: <Mail size={20} /> },
+    { label: 'Compétences', section: 'skills' as Section, icon: <Code size={20} /> },
+    { label: 'Expérience', section: 'experience' as Section, icon: <Briefcase size={20} /> },
+    { label: 'Formation', section: 'education' as Section, icon: <GraduationCap size={20} /> },
+    { label: 'Projets', section: 'projects' as Section, icon: <Laptop size={20} /> },
+    { label: 'Contact', section: 'contact' as Section, icon: <Mail size={20} /> },
   ]
+
 
   return (
     <div className="fixed top-4 right-4 z-[100] md:hidden">
-      {/* Toggle Button */}
       <div className="flex gap-2 items-center">
-        {/* Theme Toggle */}
         <button
           onClick={() => setTheme(isDark ? 'light' : 'dark')}
           aria-label="Changer le thème"
@@ -54,7 +52,6 @@ export default function MobileNav({ onSectionChange, currentSection }: MobileNav
           </AnimatePresence>
         </button>
 
-        {/* Menu Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Ouvrir le menu"
@@ -64,11 +61,9 @@ export default function MobileNav({ onSectionChange, currentSection }: MobileNav
         </button>
       </div>
 
-      {/* Overlay + Side Menu */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90]"
               initial={{ opacity: 0 }}
@@ -77,7 +72,6 @@ export default function MobileNav({ onSectionChange, currentSection }: MobileNav
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Menu Slide */}
             <motion.nav
               initial={{ x: '100%' }}
               animate={{ x: 0 }}

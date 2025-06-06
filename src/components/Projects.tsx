@@ -248,51 +248,45 @@ export default function ProjectGallery() {
             </motion.div>
 
             {openGallery && Array.isArray(openProject.gallery) && (
-              <Lightbox
-                open={openGallery}
-                close={() => setOpenGallery(false)}
-                closeOnBackdropClick={true}
-                slides={openProject.gallery}
-                render={{
-                  slide: ({ slide }) => {
-                    const isVideo =
-                      slide.type === 'video' ||
-                      slide?.src?.endsWith('.mp4') ||
-                      (Array.isArray(slide.sources) && slide.sources[0]?.type?.includes('video'))
+            <Lightbox
+              open={openGallery}
+              close={() => setOpenGallery(false)}
+              controller={{ closeOnBackdropClick: true }} // ✅ propriété correcte ici
+              slides={openProject.gallery.map(slide => ({
+                ...slide,
+                type: slide.type === 'image' ? 'image' : undefined,
+              }))}
+              render={{
+                slide: ({ slide }) => {
+                  const s = slide as any;
+                  const isVideo =
+                    s.type === 'video' ||
+                    s.src?.endsWith('.mp4') ||
+                    (Array.isArray(s.sources) && s.sources[0]?.type?.includes('video'));
 
-                    if (isVideo) {
-                      const videoSrc = slide?.src || slide?.sources?.[0]?.src
-                      return (
-                        <div className="flex items-center justify-center w-full h-full bg-black">
-                          <video
-                            src={videoSrc}
-                            controls
-                            autoPlay
-                            loop
-                            muted
-                            className="max-h-full max-w-full"
-                          />
-                        </div>
-                      )
-                    }
-
+                  if (isVideo) {
+                    const videoSrc = s.src || s.sources?.[0]?.src;
                     return (
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <img
-                          src={slide.src}
-                          alt={slide.caption || 'image'}
-                          className="max-h-full max-w-full object-contain"
-                        />
-                        {slide.caption && (
-                          <div className="absolute bottom-4 text-sm text-white bg-black/70 px-4 py-1 rounded-full">
-                            {slide.caption}
-                          </div>
-                        )}
+                      <div className="flex items-center justify-center w-full h-full bg-black">
+                        <video src={videoSrc} controls autoPlay loop muted className="max-h-full max-w-full" />
                       </div>
-                    )
-                  },
-                }}
-              />
+                    );
+                  }
+
+                  return (
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      <img src={s.src} alt={s.caption || 'image'} className="max-h-full max-w-full object-contain" />
+                      {s.caption && (
+                        <div className="absolute bottom-4 text-sm text-white bg-black/70 px-4 py-1 rounded-full">
+                          {s.caption}
+                        </div>
+                      )}
+                    </div>
+                  );
+                },
+              }}
+            />
+
             )}
 
           </ModalPortal>

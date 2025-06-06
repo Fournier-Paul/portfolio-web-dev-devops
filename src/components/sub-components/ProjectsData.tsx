@@ -5,7 +5,7 @@ export type Project = {
   longDescription: string
   image: string
   technologies: string[]
-  gallery?: { src: string; caption?: string; thumb?: string; type?: string; sources?: any[] }[]
+  gallery?: { src: string; caption?: string; thumb?: string; type?: string; width?: number; autoplay?: boolean;height?: number; sources?: any[] }[]
   githubLink?: string
   backendGithubLink?: string
   externalLink?: string
@@ -853,16 +853,18 @@ Elle permet d’afficher un **diaporama autonome** avec contenus dynamiques :
 				thumb: "/projects/unbee/unbee-10.png"
 			},
 			{
-				thumb: "/projects/unbee/unbee-5.png",
-				type: "video",
-				width: 800,
-				height: 600,
-				autoplay: true,
-				sources: [{
-					src: "/projects/unbee/Unbee-diapo.mp4",
-					type: "video/mp4"
-				}]
+			src: "/projects/unbee/Unbee-diapo.mp4",
+			thumb: "/projects/unbee/unbee-1.png",
+			type: "video",
+			width: 800,
+			height: 600,
+			autoplay: true,
+			sources: [{
+				src: "/projects/unbee/Unbee-diapo.mp4",
+				type: "video/mp4"
+			}]
 			}
+
 		]
 	},
 
