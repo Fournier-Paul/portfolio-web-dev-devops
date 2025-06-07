@@ -31,7 +31,7 @@ const loadPngTexture = (slug: string): Promise<THREE.Texture> => {
 const SkillCanvas = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const groupRef = useRef(new THREE.Group());
-  const animationIdRef = useRef<number>();
+  const animationIdRef = useRef<number | null>(null);
   const hoveredRef = useRef<THREE.Sprite | null>(null);
 
   useLayoutEffect(() => {
