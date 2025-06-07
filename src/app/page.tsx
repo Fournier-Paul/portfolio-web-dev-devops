@@ -6,13 +6,16 @@ import MobileNav from "@/components/sub-components/MobileNav"
 import Hero from "@/components/Hero"
 import Projects from "@/components/Projects"
 import Footer from "@/components/Footer"
-import SkillsCanvas from '@/components/SkillsCanvas'
 import SkillCategoryCards from "@/components/SkillCategoryCards"
 import Education from "@/components/Education"
 import Contact from "@/components/Contact"
 import Timeline from "@/components/Timeline"
 import { AnimatePresence, motion } from "framer-motion"
 import type { Section } from '@/components/sub-components/constants'
+import dynamic from "next/dynamic";
+
+const SkillsCanvas = dynamic(() => import('@/components/SkillsCanvas'), { ssr: false });
+
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState<Section>('home')
