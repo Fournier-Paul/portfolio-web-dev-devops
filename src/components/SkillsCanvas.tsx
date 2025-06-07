@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { motion } from "framer-motion";
-import SectionTitle from './sub-components/SectionTitle';
-import SectionDescription from './sub-components/SectionDescription';
+import SectionTitle from "./sub-components/SectionTitle";
+import SectionDescription from "./sub-components/SectionDescription";
 
 const icons = [
   "html5", "css3", "javascript", "typescript", "react", "nodejs", "nextjs", "mongodb",
@@ -16,25 +16,15 @@ const icons = [
 const radius = 27;
 const scale = 6;
 
-const loadSvgAsTexture = (slug: string): Promise<THREE.Texture> => {
+const loadPngTexture = (slug: string): Promise<THREE.Texture> => {
   return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      const size = 128;
-      const canvas = document.createElement("canvas");
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return reject("Canvas context is null");
-      ctx.clearRect(0, 0, size, size);
-      ctx.drawImage(img, 0, 0, size, size);
-      const texture = new THREE.Texture(canvas);
-      texture.needsUpdate = true;
-      resolve(texture);
-    };
-    img.onerror = (e) => reject(`Erreur de chargement de l'icône ${slug}: ${e}`);
-    img.src = `/icons/${slug}.svg`;
+    const loader = new THREE.TextureLoader();
+    loader.load(
+      `/icons/png/${slug}.png`,
+      (texture) => resolve(texture),
+      undefined,
+      (error) => reject(`Erreur de chargement de l'icône ${slug}: ${error}`)
+    );
   });
 };
 
@@ -63,7 +53,7 @@ const SkillCanvas = () => {
 
     icons.forEach(async (slug, i) => {
       try {
-        const texture = await loadSvgAsTexture(slug);
+        const texture = await loadPngTexture(slug);
         const phi = Math.acos(-1 + (2 * i) / icons.length);
         const theta = Math.sqrt(icons.length * Math.PI) * phi;
         const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true }));
