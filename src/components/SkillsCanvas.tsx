@@ -63,7 +63,7 @@ const SkillCanvas = () => {
     const sprites: THREE.Sprite[] = [];
 
     icons.forEach(async (iconSlug: string, i: number) => {
-      const url = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${iconSlug}/${iconSlug}-original.svg`;
+      const url = `https://raw.githubusercontent.com/devicons/devicon/master/icons/${iconSlug}/${iconSlug}-original.svg`;
       try {
         const texture = await loadSvgAsTexture(url);
         const phi = Math.acos(-1 + (2 * i) / icons.length);
