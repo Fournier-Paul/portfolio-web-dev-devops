@@ -3,9 +3,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { motion } from "framer-motion";
-import SectionTitle from './sub-components/SectionTitle'
-import SectionDescription from './sub-components/SectionDescription'
-
+import SectionTitle from './sub-components/SectionTitle';
+import SectionDescription from './sub-components/SectionDescription';
 
 const icons = [
   "html5", "css3", "javascript", "typescript", "react", "nodejs", "nextjs", "mongodb",
@@ -17,6 +16,7 @@ const icons = [
 const radius = 27;
 const scale = 6;
 
+// ✅ CHARGEMENT des SVG → canvas pour éviter sprites noirs
 const loadSvgAsTexture = (url: string): Promise<THREE.Texture> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -56,14 +56,13 @@ const SkillCanvas = () => {
     renderer.setSize(250, 250);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
-
     rendererRef.current = renderer;
 
     const group = groupRef.current;
     const sprites: THREE.Sprite[] = [];
 
-    icons.forEach(async (iconSlug: string, i: number) => {
-      const url = `/icons/${iconSlug}.svg`;
+    icons.forEach(async (iconSlug, i) => {
+      const url = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${iconSlug}/${iconSlug}-original.svg`;
       try {
         const texture = await loadSvgAsTexture(url);
         const phi = Math.acos(-1 + (2 * i) / icons.length);
@@ -78,7 +77,7 @@ const SkillCanvas = () => {
         group.add(sprite);
         sprites.push(sprite);
       } catch (err) {
-        console.error(`Erreur de chargement SVG ${iconSlug}:`, err);
+        console.error(`Erreur chargement SVG ${iconSlug}:`, err);
       }
     });
 
@@ -154,8 +153,7 @@ const SkillCanvas = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
         className="w-[250px] h-[250px] rounded-full hover:drop-shadow-[0_0_20px_rgba(0,191,255,0.3)] transition-all duration-700 d-none-first-canva"
-      >
-      </motion.div>
+      />
     </section>
   );
 };
