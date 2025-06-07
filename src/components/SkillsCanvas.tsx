@@ -16,8 +16,7 @@ const icons = [
 const radius = 27;
 const scale = 6;
 
-// ✅ CHARGEMENT des SVG → canvas pour éviter sprites noirs
-const loadSvgAsTexture = (url: string): Promise<THREE.Texture> => {
+const loadSvgAsTexture = (slug: string): Promise<THREE.Texture> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -28,13 +27,14 @@ const loadSvgAsTexture = (url: string): Promise<THREE.Texture> => {
       canvas.height = size;
       const ctx = canvas.getContext("2d");
       if (!ctx) return reject("Canvas context is null");
+      ctx.clearRect(0, 0, size, size);
       ctx.drawImage(img, 0, 0, size, size);
       const texture = new THREE.Texture(canvas);
       texture.needsUpdate = true;
       resolve(texture);
     };
-    img.onerror = reject;
-    img.src = url;
+    img.onerror = (e) => reject(`Erreur de chargement de l'icône ${slug}: ${e}`);
+    img.src = `/icons/${slug}.svg`;
   });
 };
 
@@ -61,10 +61,9 @@ const SkillCanvas = () => {
     const group = groupRef.current;
     const sprites: THREE.Sprite[] = [];
 
-    icons.forEach(async (iconSlug, i) => {
-      const url = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${iconSlug}/${iconSlug}-original.svg`;
+    icons.forEach(async (slug, i) => {
       try {
-        const texture = await loadSvgAsTexture(url);
+        const texture = await loadSvgAsTexture(slug);
         const phi = Math.acos(-1 + (2 * i) / icons.length);
         const theta = Math.sqrt(icons.length * Math.PI) * phi;
         const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true }));
@@ -77,7 +76,7 @@ const SkillCanvas = () => {
         group.add(sprite);
         sprites.push(sprite);
       } catch (err) {
-        console.error(`Erreur chargement SVG ${iconSlug}:`, err);
+        console.error(err);
       }
     });
 
