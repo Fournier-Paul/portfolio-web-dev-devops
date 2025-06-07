@@ -3,11 +3,11 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { motion } from "framer-motion";
-import SectionTitle from "./sub-components/SectionTitle";
-import SectionDescription from "./sub-components/SectionDescription";
+import SectionTitle from './sub-components/SectionTitle';
+import SectionDescription from './sub-components/SectionDescription';
 
 const icons = [
-  "html5", "css3", "javascript", "typescript", "react", "nodejs", "nextjs", "mongodb",
+  "html5", "css3", "javascript", "typescript", "nodejs", "nextjs", "mongodb",
   "tailwindcss", "git", "github", "figma", "docker", "postgresql", "php", "firebase",
   "bash", "vuejs", "jquery", "webpack", "wordpress", "sass", "python",
   "linux", "ansible", "nginx", "mysql", "terraform", "vscode"
@@ -23,7 +23,7 @@ const loadPngTexture = (slug: string): Promise<THREE.Texture> => {
       `/icons/png/${slug}.png`,
       (texture) => resolve(texture),
       undefined,
-      (error) => reject(`Erreur de chargement de l'icône ${slug}: ${error}`)
+      (error) => reject(new Error(`Erreur chargement image ${slug}: ${error}`))
     );
   });
 };
