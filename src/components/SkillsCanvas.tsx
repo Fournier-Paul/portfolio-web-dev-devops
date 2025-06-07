@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
 import { motion } from "framer-motion";
-import SectionTitle from './sub-components/SectionTitle';
-import SectionDescription from './sub-components/SectionDescription';
+import SectionTitle from "./sub-components/SectionTitle";
+import SectionDescription from "./sub-components/SectionDescription";
 
 const icons = [
   "html5", "css3", "javascript", "typescript", "nodejs", "nextjs", "mongodb",
@@ -23,58 +23,62 @@ const loadPngTexture = (slug: string): Promise<THREE.Texture> => {
       `/icons/png/${slug}.png`,
       (texture) => resolve(texture),
       undefined,
-      (error) => reject(new Error(`Erreur chargement image ${slug}: ${error}`))
+      () => reject(new Error(`Erreur chargement image ${slug}`))
     );
   });
 };
 
 const SkillCanvas = () => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const groupRef = useRef<THREE.Group>(new THREE.Group());
+  const containerRef = useRef<HTMLDivElement>(null);
+  const groupRef = useRef(new THREE.Group());
+  const animationIdRef = useRef<number>();
   const hoveredRef = useRef<THREE.Sprite | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.z = 50;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(250, 250);
+    renderer.setSize(width, height);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
 
     const group = groupRef.current;
     const sprites: THREE.Sprite[] = [];
 
-    icons.forEach(async (slug, i) => {
-      try {
-        const texture = await loadPngTexture(slug);
-        const phi = Math.acos(-1 + (2 * i) / icons.length);
-        const theta = Math.sqrt(icons.length * Math.PI) * phi;
-        const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true }));
-        sprite.scale.set(scale, scale, 1);
-        sprite.position.set(
-          radius * Math.cos(theta) * Math.sin(phi),
-          radius * Math.sin(theta) * Math.sin(phi),
-          radius * Math.cos(phi)
-        );
-        group.add(sprite);
-        sprites.push(sprite);
-      } catch (err) {
-        console.error(err);
+    const loadIcons = async () => {
+      for (let i = 0; i < icons.length; i++) {
+        const slug = icons[i];
+        try {
+          const texture = await loadPngTexture(slug);
+          const phi = Math.acos(-1 + (2 * i) / icons.length);
+          const theta = Math.sqrt(icons.length * Math.PI) * phi;
+          const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true }));
+          sprite.scale.set(scale, scale, 1);
+          sprite.position.set(
+            radius * Math.cos(theta) * Math.sin(phi),
+            radius * Math.sin(theta) * Math.sin(phi),
+            radius * Math.cos(phi)
+          );
+          group.add(sprite);
+          sprites.push(sprite);
+        } catch (err) {
+          console.error(err);
+        }
       }
-    });
 
-    scene.add(group);
+      scene.add(group);
+    };
 
     let targetX = 0, targetY = 0;
     let rotationX = 0, rotationY = 0;
-
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
@@ -103,10 +107,8 @@ const SkillCanvas = () => {
       }
     };
 
-    window.addEventListener("mousemove", onMouseMove);
-
     const animate = () => {
-      requestAnimationFrame(animate);
+      animationIdRef.current = requestAnimationFrame(animate);
       rotationX += (targetX - rotationX) * 0.1;
       rotationY += (targetY - rotationY) * 0.1;
       const maxSpeed = 0.01;
@@ -116,9 +118,11 @@ const SkillCanvas = () => {
       renderer.render(scene, camera);
     };
 
-    animate();
+    loadIcons().then(() => animate());
+    window.addEventListener("mousemove", onMouseMove);
 
     return () => {
+      cancelAnimationFrame(animationIdRef.current!);
       window.removeEventListener("mousemove", onMouseMove);
       renderer.dispose();
     };
@@ -141,7 +145,7 @@ const SkillCanvas = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className="w-[250px] h-[250px] rounded-full hover:drop-shadow-[0_0_20px_rgba(0,191,255,0.3)] transition-all duration-700 d-none-first-canva"
+        className="w-[250px] h-[250px] rounded-full bg-black/5 hover:drop-shadow-[0_0_20px_rgba(0,191,255,0.3)] transition-all duration-700"
       />
     </section>
   );
