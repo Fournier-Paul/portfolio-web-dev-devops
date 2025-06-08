@@ -14,8 +14,7 @@ export default function ParticlesBackground() {
 
   useEffect(() => {
     if (!mounted || !theme) return;
-    // Plus contrasté selon le thème
-    setColor(theme === 'dark' ? '#ffffff88' : '#00000033');
+    setColor(theme === 'dark' ? '#ffffff88' : '#00000099');
   }, [theme, mounted]);
 
   const particlesInit = useCallback(async (engine: any) => {
@@ -36,7 +35,10 @@ export default function ParticlesBackground() {
           background: { color: { value: 'transparent' } },
           interactivity: {
             events: {
-              onHover: { enable: true, mode: 'attract' },
+              onHover: {
+                enable: typeof window !== 'undefined' && window.innerWidth > 768,
+                mode: 'attract',
+            },
               resize: true,
             },
             modes: {
