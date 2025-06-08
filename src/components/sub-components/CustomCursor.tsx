@@ -9,10 +9,16 @@ export default function CustomCursor() {
   const [isInteractive, setIsInteractive] = useState(false)
   const [isOverTerminal, setIsOverTerminal] = useState(false)
   const [isOverContactForm, setIsOverContactForm] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   const mouse = useRef({ x: 0, y: 0 })
   const ringPos = useRef({ x: 0, y: 0 })
   const dotPos = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const isMobileDevice = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+    setIsMobile(isMobileDevice)
+  }, [])
 
   useEffect(() => {
     const handleMove = (e: MouseEvent) => {
@@ -38,7 +44,6 @@ export default function CustomCursor() {
     return () => window.removeEventListener('mouseover', handleHover)
   }, [])
 
-  // Animation
   useEffect(() => {
     const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b
 
@@ -54,13 +59,12 @@ export default function CustomCursor() {
       const dotSize = 6
 
       const isDark = document.documentElement.classList.contains('dark')
-
       let color = getComputedStyle(document.body).getPropertyValue('--foreground').trim() || '#000000'
 
       if (isOverTerminal) {
         color = '#ffffff'
       } else if (isOverContactForm && isDark) {
-        color = '#000000' // curseur noir en mode sombre sur le formulaire
+        color = '#000000'
       }
 
       if (ringRef.current) {
@@ -82,6 +86,8 @@ export default function CustomCursor() {
 
     animate()
   }, [isInteractive, isOverTerminal, isOverContactForm])
+
+  if (isMobile) return null
 
   return (
     <>
