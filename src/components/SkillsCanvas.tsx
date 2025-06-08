@@ -47,6 +47,7 @@ const SkillCanvas = () => {
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(width, height);
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
@@ -82,13 +83,26 @@ const SkillCanvas = () => {
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
-    const onMouseMove = (e: MouseEvent) => {
-      const rect = renderer.domElement.getBoundingClientRect();
-      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    const handlePointerMove = (e: MouseEvent | TouchEvent) => {
+      let clientX = 0;
+      let clientY = 0;
 
-      targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 0.02;
-      targetY = -((e.clientY - rect.top) / rect.height - 0.5) * 0.02;
+      const isTouch = typeof TouchEvent !== "undefined" && e instanceof TouchEvent;
+
+      if (isTouch) {
+        clientX = (e as TouchEvent).touches[0]?.clientX || 0;
+        clientY = (e as TouchEvent).touches[0]?.clientY || 0;
+      } else {
+        clientX = (e as MouseEvent).clientX;
+        clientY = (e as MouseEvent).clientY;
+      }
+
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+
+      targetX = ((clientX - rect.left) / rect.width - 0.5) * 0.02;
+      targetY = -((clientY - rect.top) / rect.height - 0.5) * 0.02;
 
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(sprites);
@@ -119,11 +133,14 @@ const SkillCanvas = () => {
     };
 
     loadIcons().then(() => animate());
-    window.addEventListener("mousemove", onMouseMove);
+
+    window.addEventListener("mousemove", handlePointerMove);
+    window.addEventListener("touchmove", handlePointerMove, { passive: true });
 
     return () => {
       cancelAnimationFrame(animationIdRef.current!);
-      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousemove", handlePointerMove);
+      window.removeEventListener("touchmove", handlePointerMove);
       renderer.dispose();
     };
   }, []);
@@ -137,7 +154,9 @@ const SkillCanvas = () => {
         className="text-center max-w-3xl"
       >
         <SectionTitle>Stack technique</SectionTitle>
-        <SectionDescription>Un aperçu des technologies que j’explore dans mon travail</SectionDescription>
+        <SectionDescription>
+          Un aperçu des technologies que j’explore dans mon travail
+        </SectionDescription>
       </motion.div>
 
       <motion.div
