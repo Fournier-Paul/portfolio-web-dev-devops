@@ -44,7 +44,7 @@ input, textarea, button, select {
   cursor: auto;
 }
 
-.d-none-first-canva canvas:first-child {
+canvas:first-child {
   display: none !important;
 }
 
