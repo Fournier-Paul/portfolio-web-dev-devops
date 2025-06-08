@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from "@/components/Header"
 import MobileNav from "@/components/sub-components/MobileNav"
 import Hero from "@/components/Hero"
@@ -16,9 +16,23 @@ import dynamic from "next/dynamic";
 
 const SkillsCanvas = dynamic(() => import('@/components/SkillsCanvas'), { ssr: false });
 
-
 export default function Home() {
-  const [currentSection, setCurrentSection] = useState<Section>('home')
+  const [currentSection, setCurrentSection] = useState<Section | null>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    const storedSection = localStorage.getItem('currentSection') as Section | null
+    setCurrentSection(storedSection || 'home')
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (currentSection) {
+      localStorage.setItem('currentSection', currentSection)
+    }
+  }, [currentSection])
+
+  if (!mounted || !currentSection) return null
 
   const renderSection = () => {
     switch (currentSection) {
@@ -45,21 +59,21 @@ export default function Home() {
   }
 
   return (
-<>
-  <Header
-    onSectionChange={setCurrentSection}
-    currentSection={currentSection}
-  />
+    <>
+      <Header
+        onSectionChange={setCurrentSection}
+        currentSection={currentSection}
+      />
 
-  <MobileNav
-    onSectionChange={setCurrentSection}
-    currentSection={currentSection}
-  />
+      <MobileNav
+        onSectionChange={setCurrentSection}
+        currentSection={currentSection}
+      />
 
-  <MobileNav
-    onSectionChange={setCurrentSection}
-    currentSection={currentSection}
-  />
+      <MobileNav
+        onSectionChange={setCurrentSection}
+        currentSection={currentSection}
+      />
 
       <main className="min-h-[92vh]">
         <AnimatePresence mode="wait">
