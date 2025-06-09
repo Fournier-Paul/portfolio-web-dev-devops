@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next serve out"
+    "start": "next start"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.5",
