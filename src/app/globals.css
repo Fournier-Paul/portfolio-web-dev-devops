@@ -63,3 +63,19 @@ canvas:first-child {
   background-color: var(--highlight);
   border-radius: 9999px;
 }
+
+
+@keyframes ripple {
+  from {
+    transform: scale(0.5);
+    opacity: 0.3;
+  }
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 0.5s ease-out forwards;
+}

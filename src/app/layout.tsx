@@ -1,22 +1,26 @@
-import './globals.css'
-import { ReactNode } from 'react'
+'use client'
+
+import { ReactNode, useEffect, useState } from 'react'
+import CustomCursor from '../components/sub-components/CustomCursor'
+import TouchFeedback from '../components/sub-components/TouchFeedback'
 import { ThemeProvider } from '../components/sub-components/ThemeProvider'
 import AppWrapper from '../components/sub-components/AppWrapper'
 import ParticlesBackground from '../components/sub-components/ParticlesBackground'
-import CustomCursor from '../components/sub-components/CustomCursor'
 import { Toaster } from 'react-hot-toast'
 
-
-export const metadata = {
-  title: 'Portfolio - Paul Fournier',
-  description: 'Développeur Web / DevOps',
-}
-
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const isMobileDevice = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+    setIsMobile(isMobileDevice)
+  }, [])
+
   return (
     <html lang="fr" className="dark" suppressHydrationWarning>
       <body className="relative min-h-screen overflow-x-hidden">
-        <CustomCursor />
+        {!isMobile && <CustomCursor />}
+        {isMobile && <TouchFeedback />}
         <ThemeProvider>
           <ParticlesBackground />
           <Toaster position="top-right" />
