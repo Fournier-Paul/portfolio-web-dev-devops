@@ -12,18 +12,16 @@ import Contact from "@/components/Contact"
 import Timeline from "@/components/Timeline"
 import { AnimatePresence, motion } from "framer-motion"
 import type { Section } from '@/components/sub-components/constants'
-import dynamic from "next/dynamic";
+import dynamic from "next/dynamic"
 
-const SkillsCanvas = dynamic(() => import('@/components/SkillsCanvas'), { ssr: false });
+const SkillsCanvas = dynamic(() => import('@/components/SkillsCanvas'), { ssr: false })
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState<Section | null>(null)
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     const storedSection = localStorage.getItem('currentSection') as Section | null
-    setCurrentSection(storedSection || 'home')
-    setMounted(true)
+    setCurrentSection(storedSection ?? 'home')
   }, [])
 
   useEffect(() => {
@@ -32,7 +30,7 @@ export default function Home() {
     }
   }, [currentSection])
 
-  if (!mounted || !currentSection) return null
+  if (currentSection === null) return null
 
   const renderSection = () => {
     switch (currentSection) {
@@ -61,11 +59,6 @@ export default function Home() {
   return (
     <>
       <Header
-        onSectionChange={setCurrentSection}
-        currentSection={currentSection}
-      />
-
-      <MobileNav
         onSectionChange={setCurrentSection}
         currentSection={currentSection}
       />

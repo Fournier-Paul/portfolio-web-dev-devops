@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { motion } from "framer-motion";
 import SectionTitle from "./sub-components/SectionTitle";
@@ -33,6 +33,7 @@ const SkillCanvas = () => {
   const groupRef = useRef(new THREE.Group());
   const animationIdRef = useRef<number | null>(null);
   const hoveredRef = useRef<THREE.Sprite | null>(null);
+  const [initialized, setInitialized] = useState(false);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -75,7 +76,13 @@ const SkillCanvas = () => {
         }
       }
 
-      scene.add(group);
+      if (sprites.length > 0) {
+        scene.add(group);
+        animate();
+        setInitialized(true);
+      } else {
+        console.warn("Aucun sprite chargé pour SkillsCanvas.");
+      }
     };
 
     let targetX = 0, targetY = 0;
@@ -126,13 +133,17 @@ const SkillCanvas = () => {
       rotationX += (targetX - rotationX) * 0.1;
       rotationY += (targetY - rotationY) * 0.1;
       const maxSpeed = 0.01;
+
+      // Ajoute une rotation permanente même sans interaction
+      group.rotation.y += 0.002;
+
       group.rotation.y += THREE.MathUtils.clamp(rotationX, -maxSpeed, maxSpeed);
       group.rotation.x += THREE.MathUtils.clamp(rotationY, -maxSpeed, maxSpeed);
       group.children.forEach((sprite) => (sprite as THREE.Sprite).lookAt(camera.position));
       renderer.render(scene, camera);
     };
 
-    loadIcons().then(() => animate());
+    loadIcons();
 
     window.addEventListener("mousemove", handlePointerMove);
     window.addEventListener("touchmove", handlePointerMove, { passive: true });
@@ -164,7 +175,9 @@ const SkillCanvas = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className="w-[250px] h-[250px] rounded-full bg-black/5 hover:drop-shadow-[0_0_20px_rgba(0,191,255,0.3)] transition-all duration-700"
+        className={`w-[250px] h-[250px] rounded-full bg-black/5 transition-all duration-700 ${
+          initialized ? "hover:drop-shadow-[0_0_20px_rgba(0,191,255,0.3)]" : ""
+        }`}
       />
     </section>
   );
