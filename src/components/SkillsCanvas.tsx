@@ -175,7 +175,7 @@ const SkillCanvas = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className={`w-[250px] h-[250px] rounded-full bg-black/5 transition-all duration-700 ${
+        className={`w-[250px] h-[250px] rounded-full transition-all duration-700 ${
           initialized ? "hover:drop-shadow-[0_0_20px_rgba(0,191,255,0.3)]" : ""
         }`}
       />
