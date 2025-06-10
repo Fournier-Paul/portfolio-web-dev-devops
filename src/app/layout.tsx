@@ -1,5 +1,6 @@
 'use client'
 
+import './globals.css'
 import { ReactNode, useEffect, useState } from 'react'
 import CustomCursor from '../components/sub-components/CustomCursor'
 import TouchFeedback from '../components/sub-components/TouchFeedback'
