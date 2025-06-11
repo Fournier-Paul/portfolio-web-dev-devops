@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <html lang="fr" className="dark" suppressHydrationWarning>
+    <html lang="fr" suppressHydrationWarning>
       <body className="relative min-h-screen overflow-x-hidden">
         {!isMobile && <CustomCursor />}
         {isMobile && <TouchFeedback />}
