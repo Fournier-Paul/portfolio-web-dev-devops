@@ -87,7 +87,7 @@ Une migration vers un **cluster K3s** est en cours pour améliorer :
 
 	{
 		title: "Site du Championnat de France de Drift FFSA",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Actualités, événements et résultats de la compétition Drift.",
 		image: "/projects/drift.png",
 		longDescription: `### 🏁 Site du Championnat de France de Drift FFSA
@@ -131,7 +131,7 @@ Ce projet inclut :
 
 	{
 		title: "ParkLib",
-		category: "Mobile",
+		category: "Application Mobile",
 		description: "Application mobile de localisation de Parking publique et de location de parking privé.",
 		image: "/projects/parklib.png",
 		longDescription: `### 🚗 ParkLib — Application de Parking intelligent
@@ -363,7 +363,7 @@ Cette infrastructure hybride combine **cloud public** et **serveur local** pour 
 	},
 	{
 		title: "Live DriftFrance",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site live du Championnat Drift FFSA. Classement en direct via télémétrie, frontend/backend/API/sécurité.",
 		longDescription: `### 🏁 Live DriftFrance — Suivi en temps réel
 
@@ -416,7 +416,7 @@ Ce projet est un **script Python** qui automatise la mise à jour des classement
 	},
 	{
 		title: "Endurance24",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site d’actualité du motorsport",
 		longDescription: `### 🏎️ Endurance24 — Site d’actualité Motorsport
 
@@ -457,7 +457,7 @@ Développement d’un **site d'actualités** pour couvrir l’actualité du spor
 
 	{
 		title: "Shop Driv'n",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site e-commerce pour stages et expériences de pilotage avec gestion de panier, paiement et sécurité.",
 		longDescription: `### 🏁 Shop Driv'n — Stages et Expériences de Pilotage
 
@@ -520,7 +520,7 @@ Ce projet consiste en un **outil from-scratch** permettant aux utilisateurs de *
 	},
 	{
 		title: "Cani Cottage",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site pour une garderie éducative avec backend, base de données et sécurité.",
 		longDescription: `### 🐶 Cani Cottage — Site de Garderie éducative
 
@@ -559,7 +559,7 @@ Développement d’un site vitrine complet pour la **garderie éducative Cani Co
 
 	{
 		title: "Autowebbb",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Agence de communication automobile avec frontend, backend et base de données sécurisés.",
 		longDescription: `### 🚘 Autowebbb — Agence de Communication Automobile
 
@@ -598,7 +598,7 @@ Le projet couvre toutes les briques essentielles à une application web moderne 
 	},
 	{
 		title: "Steve Leiber",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site du pilote champion de drift Steve Leiber avec fonctionnalités complètes.",
 		longDescription: `### 🏎️ Steve Leiber — Site officiel du pilote
 
@@ -636,7 +636,7 @@ Ce projet inclut :
 	},
 	{
 		title: "Julien Gerbi",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site du pilote Julien Gerbi avec frontend, backend et base de données sécurisés.",
 		longDescription: `### 🏁 Julien Gerbi — Site officiel
 
@@ -674,7 +674,7 @@ Création d’un site professionnel complet pour le **pilote Julien Gerbi**, all
 	},
 	{
 		title: "Galerie Riva",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site e-commerce d'antiquité, avec base de données, panier, paiement et API La Poste.",
 		longDescription: `### 🛒 Galerie Riva — Site E-commerce d'antiquité
 
@@ -708,7 +708,7 @@ Développement **from scratch** d'une plateforme e-commerce spécialisée dans l
 	},
 	{
 		title: "SymBnb",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site fictif de location de vacances avec gestion des utilisateurs et réservations.",
 		githubLink: "https://github.com/Fournier-Paul/SymBnb",
 		longDescription: `### 🏡 SymBnb — Prototype de location de vacances
@@ -746,7 +746,7 @@ Développement d’un **site factice** de location de vacances avec le framework
 	},
 	{
 		title: "Panterest",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site fictif de partage de photographies avec gestion utilisateurs et publications.",
 		githubLink: "https://github.com/Fournier-Paul/Panterest",
 		longDescription: `### 🖼️ Panterest — Plateforme de partage photo
@@ -785,7 +785,7 @@ Développement d’un **site factice** de partage de photographies en utilisant 
 
 	{
 		title: "Unbee",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site CMS embarqué pour afficher un diaporama dans une salle de sport depuis un Raspberry Pi.",
 		githubLink: "https://github.com/Fournier-Paul/Unbee",
 		longDescription: `### 🏋️ Unbee — Diaporama dynamique pour salle de sport
@@ -903,7 +903,7 @@ Elle permet d’afficher un **diaporama autonome** avec contenus dynamiques :
 
 	{
 		title: "App Météo",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Application météo simple développée avec VueJS.",
 		image: "/projects/api-meteo.png",
 		githubLink: "https://github.com/Fournier-Paul/MeteoApiVueJs",
@@ -935,7 +935,7 @@ Développement d’une **application météo légère** permettant d’afficher 
 
 	{
 		title: "Stuliday",
-		category: "Web",
+		category: "Web / Mobile",
 		description: "Site Front-end de réservation de logements à la montagne (premier projet).",
 		image: "/projects/stuliday.png",
 		githubLink: "https://github.com/Fournier-Paul/Stuliday",

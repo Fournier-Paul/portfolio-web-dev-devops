@@ -15,7 +15,7 @@ import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 import SectionDescription from './sub-components/SectionDescription'
 
-const categories = ['Tous', 'Web', 'Infra', 'Mobile', 'Automatisation']
+const categories = ['Tous', 'Web / Mobile', 'Infra', 'Application Mobile', 'Automatisation']
 
 export default function ProjectGallery() {
   const [selected, setSelected] = useState('Tous')
@@ -251,7 +251,7 @@ export default function ProjectGallery() {
             <Lightbox
               open={openGallery}
               close={() => setOpenGallery(false)}
-              controller={{ closeOnBackdropClick: true }} // ✅ propriété correcte ici
+              controller={{ closeOnBackdropClick: true }}
               slides={openProject.gallery.map(slide => ({
                 ...slide,
                 type: slide.type === 'image' ? 'image' : undefined,
