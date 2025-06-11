@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ThemeProvider>
           <ParticlesBackground />
           <Toaster position="top-right" />
-          <div className="relative z-0 min-h-screen dark:bg-[#020617] text-[#171717] dark:text-[#ededed] transition-colors duration-1000">
+            <div className="relative z-0 min-h-screen bg-[var(--background)] dark:bg-[#020617] text-[var(--text-main)] dark:text-[#ededed] transition-colors duration-1000">
             <AppWrapper>{children}</AppWrapper>
           </div>
         </ThemeProvider>
