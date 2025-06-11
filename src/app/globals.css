@@ -85,3 +85,8 @@ canvas.three-canvas {
 .animate-ripple {
   animation: ripple 0.5s ease-out forwards;
 }
+
+html[class~="dark"] body {
+  background-color: #0a192f !important;
+  color: #f8fafc !important;
+}
