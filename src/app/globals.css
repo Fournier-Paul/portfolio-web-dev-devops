@@ -44,9 +44,15 @@ input, textarea, button, select {
   cursor: auto;
 }
 
-canvas:first-child {
-  display: none !important;
+
+canvas.three-canvas {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: block;
+  pointer-events: auto;
 }
+
 
 .nav-gradient-border {
   border: 2px solid transparent;
