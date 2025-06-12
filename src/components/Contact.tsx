@@ -9,6 +9,8 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 
 export default function ContactSection() {
+  console.log('✅ ContactSection chargé')
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,7 +29,9 @@ export default function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
 
+    console.log('🧪 Demande du token reCAPTCHA...')
     const token = await getRecaptchaToken('contact_form')
+    console.log('📥 Token reçu :', token)
 
     if (!token) {
       toast.error('Erreur de vérification reCAPTCHA.')
@@ -35,8 +39,12 @@ export default function ContactSection() {
       return
     }
 
+    const apiURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+
+    console.log(`🚀 Envoi de la requête à ${apiURL}/send-mail...`)
+
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch(`${apiURL}/send-mail`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, recaptchaToken: token }),
@@ -46,7 +54,8 @@ export default function ContactSection() {
 
       toast.success('Votre message a bien été envoyé !')
       setFormData({ name: '', email: '', subject: '', message: '' })
-    } catch {
+    } catch (err) {
+      console.error('❌ Erreur lors de l’envoi :', err)
       toast.error("Erreur lors de l'envoi du message.")
     } finally {
       setIsSubmitting(false)
@@ -107,7 +116,7 @@ export default function ContactSection() {
                 placeholder="Votre nom"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full p-3 rounded-md border border-zinc-300 dark:border-zinc-700 text-[var(--text-main)] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--highlight)]"
+                className="w-full p-3 rounded-md border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--highlight)]"
                 required
               />
               <input
@@ -116,7 +125,7 @@ export default function ContactSection() {
                 placeholder="Votre email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full p-3 rounded-md border border-zinc-300 dark:border-zinc-700 text-[var(--text-main)] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--highlight)]"
+                className="w-full p-3 rounded-md border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--highlight)]"
                 required
               />
               <input
@@ -125,7 +134,7 @@ export default function ContactSection() {
                 placeholder="Sujet"
                 value={formData.subject}
                 onChange={handleChange}
-                className="w-full p-3 rounded-md border border-zinc-300 dark:border-zinc-700 text-[var(--text-main)] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--highlight)]"
+                className="w-full p-3 rounded-md border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--highlight)]"
               />
               <textarea
                 name="message"
@@ -133,7 +142,7 @@ export default function ContactSection() {
                 placeholder="Votre message"
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full p-3 rounded-md border border-zinc-300 dark:border-zinc-700 text-[var(--text-main)] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--highlight)]"
+                className="w-full p-3 rounded-md border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-[var(--highlight)]"
                 required
               />
 
