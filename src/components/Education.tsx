@@ -11,7 +11,7 @@ const formations = [
     etablissement: "",
     dates: "01/2025",
     description: "Dossier complet disponible sur demande.",
-    liens: [{ label: "Référentiel", url: "#" }],
+    liens: [{ label: "Référentiel", url: "/docs/Référentiel_EASRSI.pdf" }],
     matieres: []
   },
   {
@@ -20,8 +20,8 @@ const formations = [
     dates: "06/2023",
     description: "Dossier complet disponible sur demande.",
     liens: [
-      { label: "Référentiel dossier projet", url: "#" },
-      { label: "Référentiel dossier professionnel", url: "#" }
+      { label: "Référentiel dossier projet", url: "/docs/dossier_projet_cda.pdf" },
+      { label: "Référentiel dossier professionnel", url: "/docs/Dossier_professionnel_CDA.pdf" }
     ],
     matieres: []
   },
