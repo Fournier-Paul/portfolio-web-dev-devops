@@ -27,7 +27,7 @@ export default function RootLayoutClient({ children }: { children: ReactNode }) 
       {isMobile && <TouchFeedback />}
       <ParticlesBackground />
       <Toaster position="top-right" />
-      <div className="relative z-0 min-h-screen bg-[var(--background)] text-[var(--text-main)] transition-colors duration-1000">
+      <div className="relative z-0 min-h-screen bg-[var(--background)] text-[var(--text-main)] dark:bg-[var(--background)] dark:text-[var(--text-main)] transition-colors duration-1000">
         <AppWrapper>{children}</AppWrapper>
       </div>
     </ThemeProvider>
