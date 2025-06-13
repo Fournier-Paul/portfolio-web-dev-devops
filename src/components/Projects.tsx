@@ -14,6 +14,8 @@ import ModalPortal from './sub-components/ModalPortal'
 import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 import SectionDescription from './sub-components/SectionDescription'
+import { ResponsiveImage } from './sub-components/ResponsiveImage'
+
 
 const categories = ['Tous', 'Web / Mobile', 'Infra', 'Application Mobile', 'Automatisation']
 
@@ -78,11 +80,10 @@ export default function ProjectGallery() {
               onClick={() => setOpenProjectIndex(index)}
             >
               <div className="relative h-48 w-full overflow-hidden">
-                <Image
+                <ResponsiveImage
                   src={project.image}
                   alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <div className="p-5 flex flex-col justify-between h-full">
@@ -147,12 +148,10 @@ export default function ProjectGallery() {
                 </button>
 
                 <div className="relative h-48 mb-6 rounded-lg overflow-hidden mt-6 bg-[var(--card-bg)] flex items-center justify-center">
-                  <Image
+                  <ResponsiveImage
                     src={openProject.image}
                     alt={openProject.title}
-                    width={600}
-                    height={200}
-                    className="h-full w-auto object-contain border border-[var(--highlight)] rounded-xl"
+                    className="max-h-full max-w-full object-contain border border-[var(--highlight)] rounded-xl"
                   />
                 </div>
 
@@ -275,7 +274,7 @@ export default function ProjectGallery() {
 
                   return (
                     <div className="relative w-full h-full flex items-center justify-center">
-                      <img src={s.src} alt={s.caption || 'image'} className="max-h-full max-w-full object-contain" />
+                      <ResponsiveImage src={s.src} alt={s.caption || 'image'} className="max-h-full max-w-full object-contain" />
                       {s.caption && (
                         <div className="absolute bottom-4 text-sm text-white bg-black/70 px-4 py-1 rounded-full">
                           {s.caption}
