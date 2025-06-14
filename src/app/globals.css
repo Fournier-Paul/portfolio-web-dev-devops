@@ -29,6 +29,11 @@ body {
   @apply text-white;
 }
 
+.theme-container {
+  @apply bg-[var(--background)] text-[var(--text-main)] dark:bg-[var(--background)] dark:text-[var(--text-main)];
+}
+
+
 * {
   cursor: none !important;
 }
