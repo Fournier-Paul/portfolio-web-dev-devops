@@ -1,11 +1,11 @@
 import { ReactNode } from 'react'
-import RootLayoutClient from '../components/RootLayoutClient'
+import RootLayoutClient from '../components/layout/RootLayoutClient'
 
 export const metadata = {
   title: "Paul Fournier – Développeur Web / DevOps",
   description: "Portfolio de Paul Fournier, développeur fullstack et ingénieur DevOps passionné.",
   icons: {
-    icon: '/favicon.ico',
+    icon: '/images/icons/favicon.ico',
   },
 }
 

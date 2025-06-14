@@ -1,20 +1,20 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Header from "@/components/Header"
-import MobileNav from "@/components/sub-components/MobileNav"
-import Hero from "@/components/Hero"
-import Projects from "@/components/Projects"
-import Footer from "@/components/Footer"
-import SkillCategoryCards from "@/components/SkillCategoryCards"
-import Education from "@/components/Education"
-import Contact from "@/components/Contact"
-import Timeline from "@/components/Timeline"
+import Header from "@/components/layout/Header"
+import MobileNav from "@/components/layout/MobileNav"
+import Hero from "@/components/sections/Hero"
+import Projects from "@/components/sections/Projects"
+import Footer from "@/components/layout/Footer"
+import SkillCategoryCards from "@/components/sections/SkillCategoryCards"
+import Education from "@/components/sections/Education"
+import Contact from "@/components/sections/Contact"
+import Timeline from "@/components/sections/Timeline"
 import { AnimatePresence, motion } from "framer-motion"
-import type { Section } from '@/components/sub-components/constants'
+import type { Section } from '@/components/ui/constants'
 import dynamic from "next/dynamic"
 
-const SkillsCanvas = dynamic(() => import('@/components/SkillsCanvas'), { ssr: false })
+const SkillsCanvas = dynamic(() => import('@/components/sections/SkillsCanvas'), { ssr: false })
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState<Section | null>(null)

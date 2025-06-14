@@ -14,7 +14,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'Échec de reCAPTCHA' }, { status: 400 })
   }
 
-  console.log('📬 Message reçu :', { name, email, subject, message })
-
   return NextResponse.json({ message: 'Message bien reçu !' })
 }
