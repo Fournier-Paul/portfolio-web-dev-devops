@@ -8,7 +8,7 @@ export const metadata = {
     title: "Paul Fournier – Développeur Web & DevOps",
     description: "Portfolio complet de Paul Fournier. Web, mobile, DevOps, automatisation et plus.",
   icons: {
-    icon: '/images/icons/favicon.ico',
+    icon: '/favicon.ico',
   },
     url: "https://paul-fournier.dev/",
     siteName: "Paul Fournier Portfolio",
