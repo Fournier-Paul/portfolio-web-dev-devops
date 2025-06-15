@@ -43,7 +43,7 @@ const formations = [
 
 export default function ParcoursScolaire() {
   return (
-    <section className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
+    <section id="education" aria-label="Mes diplômes" className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}

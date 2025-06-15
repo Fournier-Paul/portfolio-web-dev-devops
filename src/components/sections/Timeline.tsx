@@ -50,7 +50,7 @@ const events = [
 
 export default function ExperienceTimeline() {
   return (
-    <section className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
+    <section id="timeline" aria-label="Mon parcours" className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}

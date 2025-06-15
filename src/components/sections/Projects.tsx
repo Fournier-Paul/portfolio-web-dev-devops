@@ -42,7 +42,7 @@ export default function ProjectGallery() {
   }, [openProjectIndex, filtered.length])
 
   return (
-    <section className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
+    <section id="projects" aria-label="Mes projets" className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
       <div className="text-center max-w-3xl">
         <SectionTitle>Mes Projets</SectionTitle>
         <SectionDescription>Une sélection de projets Web, DevOps, Mobile et automatisation que j'ai réalisés.</SectionDescription>

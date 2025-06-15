@@ -108,7 +108,7 @@ const categories: SkillCategory[] = [
 
 const SkillCategoryCards: FC = () => {
   return (
-    <section className="relative z-10 mb-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
+    <section id="skills" aria-label="Mes compétences" className="relative z-10 mb-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
