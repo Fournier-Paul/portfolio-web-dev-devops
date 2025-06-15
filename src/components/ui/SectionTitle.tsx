@@ -2,10 +2,12 @@
 
 import { useTheme } from 'next-themes'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, ElementType } from 'react'
 
 interface SectionTitleProps {
   children: string
+  as?: 'h1' | 'h2' // Permet d’utiliser le bon niveau sémantique
+  className?: string
 }
 
 const letterVariants = {
@@ -17,7 +19,11 @@ const letterVariants = {
   },
 }
 
-export default function SectionTitle({ children }: SectionTitleProps) {
+export default function SectionTitle({
+  children,
+  as = 'h2',
+  className = '',
+}: SectionTitleProps) {
   const { resolvedTheme } = useTheme()
   const [isDark, setIsDark] = useState(false)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -26,18 +32,19 @@ export default function SectionTitle({ children }: SectionTitleProps) {
     setIsDark(resolvedTheme === 'dark')
   }, [resolvedTheme])
 
-  // Sépare les lettres et les espaces automatiquement
   const letters = children.split('').map((char, i) => ({
     char,
     key: `${char}-${i}`,
   }))
 
+  const Tag: ElementType = motion[as]
+
   return (
-    <motion.h2
+    <Tag
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="text-3xl md:text-5xl font-extrabold text-center inline-flex flex-wrap justify-center gap-0.5"
+      className={`text-3xl md:text-5xl font-extrabold text-center inline-flex flex-wrap justify-center gap-0.5 ${className}`}
     >
       {letters.map(({ char, key }, i) => (
         <motion.span
@@ -58,6 +65,6 @@ export default function SectionTitle({ children }: SectionTitleProps) {
           {char}
         </motion.span>
       ))}
-    </motion.h2>
+    </Tag>
   )
 }

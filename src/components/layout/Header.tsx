@@ -34,11 +34,11 @@ export default function Header({ onSectionChange, currentSection }: HeaderProps)
     <header className="w-full justify-center sticky top-4 z-30 px-4 hidden md:flex">
       <div
         className={`nav-gradient-border flex items-center px-4 py-2 gap-2 rounded-full
-        backdrop-blur-md transition-all duration-500
+        backdrop-blur-md transition-all duration-1000
         ${isDark ? 'bg-[#0f172a]/80' : 'bg-white/80'}
       `}
         style={{
-          ['--nav-bg' as any]: isDark ? '#0f172a' : '#ffffff',
+          ['--nav-bg' as any]: isDark ? '#0f172a' : '#fafafa',
           ['--nav-gradient-start' as any]: isDark ? '#0d9488' : '#d1d5db',
           ['--nav-gradient-end' as any]: isDark ? '#0d9488' : '#e5e7eb',
         }}
@@ -46,22 +46,28 @@ export default function Header({ onSectionChange, currentSection }: HeaderProps)
         {navItems.map(({ label, section, icon }) => {
           const isActive = currentSection === section
           return (
-            <button
-              key={section}
-              onClick={() => onSectionChange(section)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all duration-300 ${
-                isActive
-                  ? isDark
-                    ? 'bg-zinc-800/80 text-white font-semibold'
-                    : 'bg-zinc-200 text-zinc-900 font-semibold'
-                  : isDark
-                    ? 'text-zinc-300 hover:bg-white/10'
-                    : 'text-zinc-600 hover:bg-zinc-100'
-              }`}
-            >
-              {icon}
-              <span>{label}</span>
-            </button>
+<a
+  key={section}
+  href={`#${section}`}
+  onClick={(e) => {
+    e.preventDefault()
+    onSectionChange(section)
+  }}
+  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+    isActive
+      ? isDark
+        ? 'bg-zinc-800/80 text-white font-semibold'
+        : 'bg-teal-100 text-teal-900 font-semibold'
+      : isDark
+        ? 'text-zinc-300 hover:bg-white/10'
+        : 'text-zinc-700 hover:bg-teal-50 hover:text-teal-900'
+  }`}
+>
+  {icon}
+  <span>{label}</span>
+</a>
+
+
           )
         })}
 

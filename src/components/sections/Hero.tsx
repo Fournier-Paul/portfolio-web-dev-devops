@@ -15,14 +15,14 @@ export default function Hero() {
   const iconColor = resolvedTheme === 'dark' ? 'ffffff' : '000000'
 
   return (
-    <section className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
+    <section id="home" aria-label="Présentation - Paul Fournier" className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="text-center max-w-3xl"
       >
-      <SectionTitle>Paul Fournier</SectionTitle>
+      <SectionTitle as="h1">Paul Fournier</SectionTitle>
 
         <SectionDescription>Full Stack Developer / DevOps</SectionDescription>
 
