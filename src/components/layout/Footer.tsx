@@ -37,8 +37,8 @@ export default function Footer() {
           <Image
             src={iconSrc}
             alt="Icône Git"
-            width={14}
-            height={14}
+            width={12}
+            height={12}
             className="object-contain group-hover:-rotate-12 transition-transform duration-1000"
             draggable={false}
           />
