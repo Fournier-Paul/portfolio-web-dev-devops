@@ -46,28 +46,26 @@ export default function Header({ onSectionChange, currentSection }: HeaderProps)
         {navItems.map(({ label, section, icon }) => {
           const isActive = currentSection === section
           return (
-<a
-  key={section}
-  href={`#${section}`}
-  onClick={(e) => {
-    e.preventDefault()
-    onSectionChange(section)
-  }}
-  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-    isActive
-      ? isDark
-        ? 'bg-zinc-800/80 text-white font-semibold'
-        : 'bg-teal-100 text-teal-900 font-semibold'
-      : isDark
-        ? 'text-zinc-300 hover:bg-white/10'
-        : 'text-zinc-700 hover:bg-teal-50 hover:text-teal-900'
-  }`}
->
-  {icon}
-  <span>{label}</span>
-</a>
-
-
+      <a
+        key={section}
+        href={`#${section}`}
+        onClick={(e) => {
+          e.preventDefault()
+          onSectionChange(section)
+        }}
+        className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-1000 ${
+          isActive
+            ? isDark
+              ? 'bg-zinc-800/80 text-white font-semibold'
+              : 'bg-teal-100 text-teal-900 font-semibold'
+            : isDark
+              ? 'text-zinc-300 hover:bg-white/10'
+              : 'text-zinc-700 hover:bg-teal-50 hover:text-teal-900'
+        }`}
+      >
+        {icon}
+        <span>{label}</span>
+      </a>
           )
         })}
 

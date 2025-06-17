@@ -56,7 +56,7 @@ export default function MobileNav({ onSectionChange, currentSection }: MobileNav
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
           className={clsx(
-            "p-2 rounded-full shadow transition-transform duration-200 ease-in-out",
+            "p-2 rounded-full shadow transition-transform duration-1000 ease-in-out",
             "hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[--highlight]",
             "bg-[--card-bg] text-[--highlight]"
           )}

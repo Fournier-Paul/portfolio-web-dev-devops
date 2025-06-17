@@ -166,7 +166,7 @@ container.appendChild(renderer.domElement);
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className="relative w-[250px] h-[250px] rounded-full hover:drop-shadow-[0_0_20px_rgba(0,191,255,0.3)] transition-all  overflow-hidden duration-700"
+        className="relative w-[250px] h-[250px] rounded-full hover:drop-shadow-[0_0_20px_rgba(0,191,255,0.3)] transition-all  overflow-hidden duration-1000"
       />
     </section>
   );

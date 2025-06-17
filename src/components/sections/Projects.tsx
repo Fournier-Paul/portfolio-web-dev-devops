@@ -75,14 +75,14 @@ export default function ProjectGallery() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="group bg-[var(--card-bg)] rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-shadow duration-300 border border-transparent hover:border-[var(--highlight)] hover:scale-[1.02] ease-in-out"
+              className="group bg-[var(--card-bg)] rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-shadow duration-1000 border border-transparent hover:border-[var(--highlight)] hover:scale-[1.02] ease-in-out"
               onClick={() => setOpenProjectIndex(index)}
             >
               <div className="relative h-48 w-full overflow-hidden">
                 <ResponsiveImage
                   src={project.image}
                   alt={project.title}
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-105"
                 />
               </div>
               <div className="p-5 flex flex-col justify-between h-full">

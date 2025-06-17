@@ -11,9 +11,9 @@ export default function SEO() {
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Paul Fournier",
-            url: "https://paulfournier.dev",
+            url: "https://paul-fournier.dev",
             jobTitle: "Développeur Web et DevOps",
-            // image: "https://paulfournier.dev/images/preview-projects/paul-fournier-portfolio.webp",
+            // image: "https://paul-fournier.dev/images/preview-projects/paul-fournier-portfolio.webp",
             sameAs: [
               "https://github.com/paulfournier",
               "https://linkedin.com/in/paul-fournier-dev"

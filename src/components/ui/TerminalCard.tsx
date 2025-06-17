@@ -13,8 +13,8 @@ const commandResponses: Record<string, string> = {
   help: 'Commandes disponibles: help, about, skills, contact, clear',
   about: "Passionné par le web, l'automatisation et la sécurité.\nJ'aime relever des défis complexes et proposer des solutions efficaces et durables.",
   skills: 'DevOps: Docker, CI/CD, Terraform | Web: Nuxt.js, React, Node.js | Cloud: Digital Ocean, AWS',
-  contact: '📧 contact@paulfournier.dev | 🔗 github.com/paulfournier | LinkedIn: linkedin.com/paul-fournier-dev/',
-  cv: '📄 Télécharger le CV : https://paulfournier.dev/cv.pdf',
+  contact: '📧 contact@paul-fournier.dev | 🔗 github.com/paulfournier | LinkedIn: linkedin.com/paul-fournier-dev/',
+  cv: '📄 Télécharger le CV : https://paul-fournier.dev/cv.pdf',
   ls: 'about  skills  contact  projects  cv',
   cd: 'Commande non supportée ici 😅',
   sudo: "🛑 Vous n'avez pas les permissions nécessaires pour exécuter cette commande.",
@@ -90,7 +90,7 @@ export default function TerminalCard() {
   return (
     <div data-terminal className="mt-8 w-full max-w-xl mx-auto rounded-md overflow-hidden shadow-lg bg-[#0d0d0d] font-mono text-white text-left">
       <div className="bg-zinc-800 text-left text-sm px-4 py-2 text-zinc-300 font-semibold">
-        visitor@paulfournier.dev
+        visitor@paul-fournier.dev
       </div>
       <div ref={containerRef} className="px-4 py-2 leading-relaxed text-sm h-64 overflow-y-auto">
         {displayedLines.map((line, i) => (

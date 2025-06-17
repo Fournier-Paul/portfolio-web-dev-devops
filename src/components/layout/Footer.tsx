@@ -2,9 +2,11 @@
 
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
+import { motion } from 'framer-motion';
 
 export default function Footer() {
   const { resolvedTheme } = useTheme();
+  const year = new Date().getFullYear();
 
   const iconSrc =
     resolvedTheme === 'dark'
@@ -12,30 +14,36 @@ export default function Footer() {
       : '/images/icons/git_branch_icon.svg';
 
   return (
-    <footer className="py-6 text-sm text-muted-foreground text-[var(--foreground)] flex justify-center">
-      <div className="flex items-center gap-2">
-        <span>© 2025 Paul Fournier</span>
+    <motion.footer
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className="mt-32 py-8 px-4 text-[13px] flex justify-center text-muted-foreground"
+    >
+      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center">
+        <span className="opacity-60">© {year} Paul Fournier</span>
 
-        <span className="text-muted-foreground">|</span>
+        <span className="text-muted-foreground select-none">·</span>
 
         <a
           href="https://github.com/Fournier-Paul/portfolio-web-dev-devops"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 hover:text-primary transition-colors"
-          aria-label="Code source du site"
+          className="group inline-flex items-center gap-1 hover:text-primary transition-colors duration-1000"
+          aria-label="Code source du site sur GitHub"
         >
-          <span className="mr-2">Code source</span>
+          <span className="mr-1">Code source</span>
           <Image
             src={iconSrc}
             alt="Icône Git"
             width={12}
             height={12}
-            className="object-contain"
+            className="object-contain group-hover:-rotate-12 transition-transform duration-1000"
             draggable={false}
           />
         </a>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
