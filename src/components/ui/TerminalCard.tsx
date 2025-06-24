@@ -10,8 +10,8 @@ const lines = [
 ]
 
 const commandResponses: Record<string, string> = {
-  help: 'Commandes disponibles: help, about, skills, contact, clear',
-  about: "Passionné par le web, l'automatisation et la sécurité.\nJ'aime relever des défis complexes et proposer des solutions efficaces et durables.",
+  help: 'Commandes disponibles : about, skills, experience, contact, clear',
+  about: "Je conçois des sites et applications web, ainsi que des solutions DevOps faciles à déployer, maintenir et faire évoluer.",
   skills: 'DevOps: Docker, CI/CD, Terraform | Web: Nuxt.js, React, Node.js | Cloud: Digital Ocean, AWS',
   contact: '📧 contact@paul-fournier.dev | 🔗 github.com/paulfournier | LinkedIn: linkedin.com/paul-fournier-dev/',
   cv: '📄 Télécharger le CV : https://paul-fournier.dev/cv.pdf',
@@ -20,7 +20,7 @@ const commandResponses: Record<string, string> = {
   sudo: "🛑 Vous n'avez pas les permissions nécessaires pour exécuter cette commande.",
   "rm -rf /": "😱 Erreur critique : suppression du système...😉",
   coffee: "☕ Chargement de la caféine... Prêt à coder !",
-ascii: `
+  ascii: `
 ██████╗  █████╗ ██╗   ██╗██╗     
 ██╔══██╗██╔══██╗██║   ██║██║     
 ██████╔╝███████║██║   ██║██║     
@@ -36,6 +36,7 @@ export default function TerminalCard() {
   const [input, setInput] = useState('')
   const [isTypingDone, setIsTypingDone] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     let timeouts: NodeJS.Timeout[] = []
@@ -87,12 +88,24 @@ export default function TerminalCard() {
     }
   }
 
+  const handleTerminalClick = () => {
+    inputRef.current?.focus()
+  }
+
   return (
-    <div data-terminal className="mt-8 w-full max-w-xl mx-auto rounded-md overflow-hidden shadow-lg bg-[#0d0d0d] font-mono text-white text-left">
+    <div
+      data-terminal
+      className="mt-8 w-full max-w-xl mx-auto rounded-md overflow-hidden shadow-lg bg-[#0d0d0d] font-mono text-white text-left"
+      onClick={handleTerminalClick}
+      tabIndex={0}
+    >
       <div className="bg-zinc-800 text-left text-sm px-4 py-2 text-zinc-300 font-semibold">
         visitor@paul-fournier.dev
       </div>
-      <div ref={containerRef} className="px-4 py-2 leading-relaxed text-sm h-64 overflow-y-auto">
+      <div
+        ref={containerRef}
+        className="px-4 py-2 leading-relaxed text-sm h-64 overflow-y-auto"
+      >
         {displayedLines.map((line, i) => (
           <div key={i}>
             {line.startsWith('~') && line.includes('$')
@@ -105,6 +118,7 @@ export default function TerminalCard() {
           <div className="flex items-center gap-2 mt-2">
             <span className="text-purple-400 animate-pulse">~</span>
             <input
+              ref={inputRef}
               className="bg-transparent text-white focus:outline-none w-full"
               placeholder="Tapez une commande (ex: help)"
               value={input}
@@ -124,4 +138,5 @@ function highlight(text: string) {
     .replace(/PYYNE Digital/, '<span class="text-green-400">PYYNE Digital</span>')
     .replace(/Inveterate/, '<span class="text-indigo-400">Inveterate</span>')
     .replace(/PULSAGENCY/, '<span class="text-orange-400">PULSAGENCY</span>')
+    .replace(/\n/g, '<br />')
 }
