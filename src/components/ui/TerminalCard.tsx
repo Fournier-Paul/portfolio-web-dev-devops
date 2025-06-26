@@ -6,7 +6,7 @@ const lines = [
   { prefix: '~ echo $CURRENTLY', delay: 0, type: 'command' },
   { text: 'Recherche d\'un poste de Développeur Web / DevOps', delay: 1500, type: 'output' },
   { prefix: '~ echo $PREVIOUSLY', delay: 3000, type: 'command' },
-  { text: 'Développeur Web / DevOps chez PULSAGENCY', delay: 4500, type: 'output' },
+  { text: 'Chargé du Web & DevOps chez PULSAGENCY', delay: 4500, type: 'output' },
 ]
 
 const commandResponses: Record<string, string> = {
