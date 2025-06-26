@@ -26,7 +26,7 @@ export default function MobileNav({ onSectionChange, currentSection }: MobileNav
   const navItems = [
     { label: 'Compétences', section: 'skills' as Section, icon: <Code size={20} /> },
     { label: 'Expérience', section: 'experience' as Section, icon: <Briefcase size={20} /> },
-    { label: 'Formation', section: 'education' as Section, icon: <GraduationCap size={20} /> },
+    { label: 'Diplômes', section: 'education' as Section, icon: <GraduationCap size={20} /> },
     { label: 'Projets', section: 'projects' as Section, icon: <Laptop size={20} /> },
     { label: 'Contact', section: 'contact' as Section, icon: <Mail size={20} /> },
   ]

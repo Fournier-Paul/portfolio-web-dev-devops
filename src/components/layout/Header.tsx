@@ -25,7 +25,7 @@ export default function Header({ onSectionChange, currentSection }: HeaderProps)
     { label: 'Accueil', section: 'home', icon: <Home size={16} /> },
     { label: 'Compétences', section: 'skills', icon: <Code size={16} /> },
     { label: 'Expérience', section: 'experience', icon: <Briefcase size={16} /> },
-    { label: 'Formation', section: 'education', icon: <GraduationCap size={16} /> },
+    { label: 'Diplômes', section: 'education', icon: <GraduationCap size={16} /> },
     { label: 'Projets', section: 'projects', icon: <Laptop size={16} /> },
     { label: 'Contact', section: 'contact', icon: <Mail size={16} /> },
   ]

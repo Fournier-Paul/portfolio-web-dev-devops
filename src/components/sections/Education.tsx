@@ -54,9 +54,9 @@ export default function ParcoursScolaire() {
         transition={{ duration: 0.8 }}
         className="text-center max-w-3xl"
       >
-        <SectionTitle>Parcours de formation</SectionTitle>
+        <SectionTitle>Mes diplômes</SectionTitle>
         <SectionDescription>
-          Certifications et spécialisations dans les domaines du développement web et de la sécurité informatique.
+          Formations certifiantes en Développement Web & DevOps
         </SectionDescription>
       </motion.div>
 
