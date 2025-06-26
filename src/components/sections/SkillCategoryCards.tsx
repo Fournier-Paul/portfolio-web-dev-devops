@@ -10,18 +10,10 @@ import {
   Wrench,
   Sparkles,
   ShieldCheck,
+  Package,
 } from 'lucide-react';
 
-type SkillCategory = {
-  title: string;
-  icon: React.ReactElement
-  skills: {
-    name: string;
-    logo?: string;
-  }[];
-};
-
-const categories: SkillCategory[] = [
+const categories = [
   {
     title: 'Développement Frontend',
     icon: <Code className="w-5 h-5 text-blue-500" />,
@@ -32,12 +24,13 @@ const categories: SkillCategory[] = [
       { name: 'React', logo: 'react' },
       { name: 'Next.js', logo: 'nextjs' },
       { name: 'TypeScript', logo: 'typescript' },
+      { name: 'React Native', logo: 'react' },
+      { name: 'Expo' },
       { name: 'Twig' },
-      { name: 'Tailwind CSS', logo: 'tailwindcss' },
       { name: 'HTML5', logo: 'html5' },
       { name: 'CSS3', logo: 'css3' },
-      { name: 'Bootstrap', logo: 'bootstrap' },
-      { name: 'jQuery', logo: 'jquery' },
+      { name: 'Tailwind CSS', logo: 'tailwindcss' },
+      { name: 'Sass', logo: 'sass' },
       { name: 'Seo' },
     ],
   },
@@ -49,52 +42,89 @@ const categories: SkillCategory[] = [
       { name: 'Python', logo: 'python' },
       { name: 'Symfony', logo: 'symfony' },
       { name: 'PHP', logo: 'php' },
-      { name: 'MySQL', logo: 'mysql' },
-      { name: 'SQLite', logo: 'sqlite' },
-      { name: 'PostgreSQL', logo: 'postgresql' },
       { name: 'REST APIs' },
+      { name: 'PHPUnit' },
     ],
   },
   {
-    title: 'Cloud & DevOps',
-    icon: <Cloud className="w-5 h-5 text-orange-500" />,
+    title: 'Bases de données & Cache',
+    icon: <Database className="w-5 h-5 text-teal-500" />,
+    skills: [
+      { name: 'MySQL', logo: 'mysql' },
+      { name: 'SQLite', logo: 'sqlite' },
+      { name: 'PostgreSQL', logo: 'postgresql' },
+      { name: 'Redis', logo: 'redis' },
+    ],
+  },
+  {
+    title: 'Serveurs & CMS',
+    icon: <Wrench className="w-5 h-5 text-amber-500" />,
+    skills: [
+      { name: 'Nginx', logo: 'nginx' },
+      { name: 'Apache', logo: 'apache' },
+      { name: 'WordPress', logo: 'wordpress' },
+      { name: 'Cockpit CMS' },
+    ],
+  },
+  {
+    title: 'Cloud Platforms & Services',
+    icon: <Cloud className="w-5 h-5 text-sky-500" />,
+    skills: [
+      { name: 'AWS' },
+      { name: 'DigitalOcean' },
+      { name: 'Scaleway' },
+      { name: 'OVH' },
+      { name: 'Firebase', logo: 'firebase' },
+      { name: 'Nextcloud' },
+      { name: 'Cloudflare' },
+    ],
+  },
+  {
+    title: 'DevOps & Automatisation',
+    icon: <Wrench className="w-5 h-5 text-orange-500" />,
     skills: [
       { name: 'Docker', logo: 'docker' },
       { name: 'Terraform', logo: 'terraform' },
-      { name: 'DigitalOcean' },
-      { name: 'AWS' },
-      { name: 'Scaleway' },
-      { name: 'OVH' },
+      { name: 'Jenkins' },
+      { name: 'Ansible' },
       { name: 'CI/CD' },
     ],
   },
   {
-    title: 'Outils & Technologies',
-    icon: <Wrench className="w-5 h-5 text-pink-500" />,
-    skills: [
-      { name: 'VS Code', logo: 'vscode' },
-      { name: 'Redux', logo: 'redux' },
-      { name: 'Firebase', logo: 'firebase' },
-      { name: 'NPM'},
-      { name: 'Composer' },
-    ],
-  },
-  {
-    title: 'Sécurité & Infrastructure',
+    title: 'Sécurité & Réseau',
     icon: <ShieldCheck className="w-5 h-5 text-red-500" />,
     skills: [
       { name: 'SSH' },
       { name: 'UFW' },
       { name: 'Fail2ban' },
       { name: 'OpenVAS' },
-      { name: 'Cloudflare' },
       { name: 'Wireguard VPN' },
-      { name: 'Nginx', logo: 'nginx' },
-      { name: 'Apache', logo: 'apache' },
     ],
   },
   {
-    title: 'Design UX/UI',
+    title: 'Outils de Développement',
+    icon: <Wrench className="w-5 h-5 text-pink-500" />,
+    skills: [
+      { name: 'VS Code', logo: 'vscode' },
+      { name: 'Linux' },
+      { name: 'Ubuntu' },
+      { name: 'Raspberry Pi' },
+      { name: 'Git', logo: 'git' },
+      { name: 'GitHub', logo: 'github' },
+      { name: 'GitLab', logo: 'gitlab' },
+    ],
+  },
+  {
+    title: 'Gestionnaires de paquets',
+    icon: <Package className="w-5 h-5 text-yellow-500" />,
+    skills: [
+      { name: 'YARN' },
+      { name: 'NPM' },
+      { name: 'Composer' },
+    ],
+  },
+  {
+    title: 'Design UX/UI & Modélisation',
     icon: <PenTool className="w-5 h-5 text-purple-500" />,
     skills: [
       { name: 'Figma', logo: 'figma' },
@@ -102,6 +132,7 @@ const categories: SkillCategory[] = [
       { name: 'Wireframe' },
       { name: 'Lucidchart' },
       { name: 'JMerise' },
+      { name: 'UML' },
     ],
   },
 ];

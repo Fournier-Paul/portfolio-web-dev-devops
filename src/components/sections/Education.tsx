@@ -12,7 +12,8 @@ const formations = [
     dates: "01/2025",
     description: "Dossier complet disponible sur demande.",
     liens: [{ label: "Référentiel", url: "/docs/Référentiel_EASRSI.pdf" }],
-    matieres: []
+    matieres: [],
+    obtention: true, 
   },
   {
     titre: "Concepteur développeur d'applications",
@@ -23,36 +24,41 @@ const formations = [
       { label: "Référentiel dossier projet", url: "/docs/dossier_projet_cda.pdf" },
       { label: "Référentiel dossier professionnel", url: "/docs/Dossier_professionnel_CDA.pdf" }
     ],
-    matieres: []
+    matieres: [],
+    obtention: true,
   },
   {
     titre: "Développeur Front-End",
     etablissement: "Talis-business-school",
     dates: "05/2019",
     description: "Développer la partie front-end d’une application web ou web mobile en intégrant les recommandations de sécurité.",
-    matieres: []
+    matieres: [],
+    obtention: true,
   },
   {
     titre: "Développeur Back-End",
     etablissement: "Talis-business-school",
     dates: "08/2019",
     description: "Développer la partie back-end d’une application web ou web mobile en intégrant les recommandations de sécurité.",
-    matieres: []
+    matieres: [],
+    obtention: true,
   }
 ]
 
 export default function ParcoursScolaire() {
   return (
     <section id="education" aria-label="Mes diplômes" className="relative z-10 py-32 px-6 flex flex-col items-center gap-12 text-[var(--foreground)]">
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="text-center max-w-3xl"
-    >
-    <SectionTitle>Parcours de formation</SectionTitle>
-      <SectionDescription>Certifications et spécialisations dans les domaines du développement web et de la sécurité informatique.</SectionDescription>
-    </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center max-w-3xl"
+      >
+        <SectionTitle>Parcours de formation</SectionTitle>
+        <SectionDescription>
+          Certifications et spécialisations dans les domaines du développement web et de la sécurité informatique.
+        </SectionDescription>
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -71,6 +77,12 @@ export default function ParcoursScolaire() {
                 {formation.titre}
               </h3>
             </div>
+
+            {formation.obtention && (
+              <span className="inline-block text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-0.5 rounded-full">
+                Diplôme obtenu
+              </span>
+            )}
 
             {formation.etablissement && (
               <div className="flex items-center gap-2 text-sm text-[var(--icon-color)]">
@@ -105,7 +117,6 @@ export default function ParcoursScolaire() {
                 ))}
               </div>
             )}
-
           </div>
         ))}
       </motion.div>
