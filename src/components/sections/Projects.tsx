@@ -199,8 +199,15 @@ export default function ProjectGallery() {
                       </a>
                     )}
                     {openProject.externalLink && (
-                      <a href={openProject.externalLink} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--highlight)] text-[var(--text-main)]">
-                        <ExternalLink size={18} />
+                      <a
+                        href={openProject.externalLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 whitespace-nowrap text-sm font-medium text-[var(--text-main)] hover:text-[var(--highlight)] transition"
+                        aria-label="Ouvrir le site (nouvel onglet)"
+                      >
+                        <span>Voir le site</span>
+                        <ExternalLink size={16} className="shrink-0" />
                       </a>
                     )}
                     {openProject.technicalLink && (
