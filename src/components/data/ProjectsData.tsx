@@ -17,6 +17,7 @@ export const projects: Project[] = [{
 		title: "Projet d'infrastructure locale domestique",
 		category: "Infra",
 		description: "Stack domestique hébergée sur un Raspberry Pi 5 avec services conteneurisés via Docker.",
+		githubLink: "https://github.com/Fournier-Paul/home-lab",
 		longDescription: `### 🏡 Contexte
 
 Cette infrastructure personnelle repose sur un **Raspberry Pi 5** équipé d’un **SSD NVMe**, avec tous les services gérés par **Docker**.
